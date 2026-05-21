@@ -1,0 +1,15 @@
+repositories:
+  - repo_id: example-webapp
+    repo_name: 示例前端主应用
+    category: frontend
+    local_path: /path/to/example-webapp
+    default_branch: main
+    source_of_truth: local
+    notes: 替换为真实前端项目目录
+  - repo_id: example-api
+    repo_name: 示例后端服务
+    category: backend
+    local_path: /path/to/example-api
+    default_branch: main
+    source_of_truth: local
+    notes: 替换为真实后端项目目录

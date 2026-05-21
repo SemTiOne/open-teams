@@ -1,80 +1,49 @@
-# 工作空间资产索引
+# 工作空间资产索引模板
 
-## 1. 文档目的
+## 首读入口
 
-本文用于整理当前工作区中 `sources/` 之外的全部已落地资产，帮助后续在不直接进入源码目录的前提下，快速定位可复用的：
+1. `docs/README.md`
+2. `skills/README.md`
+3. `workspace-config/code-sources.yaml`
+4. `task-completion-checklist.md`
 
-- 架构文档
-- 接口文档
-- 开发规范
-- installable skills
-- 数据字典与补充参考资料
-- 自动化脚本
+## 初始化必做清单
 
-本文应只描述当前仓库中已实际存在的资产，不对缺失资产做主观补充。
+1. 替换 `workspace-config/code-sources.yaml` 中的示例代码源
+2. 确认真实源码是进入 `sources/` 还是仅维护外部仓库映射
+3. 调整 `AGENTS.md` 中的业务线专属约束
+4. 创建首批 `docs/projects/<project>/` 文档入口
+5. 使用 `scripts/init_project_skills.py` 初始化首批项目 skill
+6. 运行 `scripts/validate_template_layout.py` 完成模板结构校验
 
-## 2. 资产分层
+## 资产分层
 
-- `docs/`：基于真实源码提炼出的高质量知识入口
-- `skills/`：面向具体项目和具体场景的执行型模板资产
-- `references/`：补充事实、字典、外围资料和占位示例
-- `scripts/`：模板生成、初始化和维护脚本
-- `change-history/`：任务级变更历史归档，默认非必读
-- `task-plans/`：任务方案归档，默认非必读
+| 目录 | 职责 | 默认是否首读 |
+| --- | --- | --- |
+| `docs/` | 架构、源码说明、开发规范 | 是 |
+| `skills/` | 项目场景化执行流程 | 是 |
+| `workspace-config/` | 代码源与配置事实 | 按需 |
+| `references/` | 数据字典、报文、环境等外围事实 | 按需 |
+| `scripts/` | 初始化与校验脚本 | 按需 |
+| `task-plans/` | 已确认方案与实施计划 | 否 |
+| `change-history/` | 历史任务记录 | 否 |
 
-## 3. 总体优先级索引
+## 推荐阅读路径
 
-### P0：进入任何项目工作前应先读
+### 全局理解
 
-1. `docs/overall-architecture/`
-2. `docs/development-specs/README.md`
-3. `skills/README.md`
-4. 本文件
-5. `task-completion-checklist.md`
+1. `docs/README.md`
+2. `skills/README.md`
+3. `workspace-config/README.md`
 
-### P1：进入单项目任务时必须先定位
+### 单项目任务
 
-1. `docs/projects/<project>/源码说明文档.md`
-2. `docs/projects/<project>/开发规范文档.md`
-3. `skills/<project>/<scene>/SKILL.md`
-4. `skills/<project>/<scene>/references/*`
-5. `skills/<project>/<scene>/examples.md`
+1. `docs/projects/README.md`
+2. 对应项目源码说明
+3. 对应项目开发规范
+4. `skills/<project>/<scene>/SKILL.md`
 
-### P2：补充查询时使用
+### 补充事实查询
 
 1. `references/README.md`
-2. `references/templates/`
-3. `references/examples/`
-
-### P3：维护优先级
-
-1. `scripts/`
-2. `change-history/TEMPLATE.md`
-3. `task-plans/TEMPLATE.md`
-
-## 4. 推荐阅读路径
-
-### 场景 A：先理解工作空间怎么用
-
-1. 读 `AGENTS.md`
-2. 读本文件
-3. 读 `task-completion-checklist.md`
-4. 读 `skills/README.md`
-
-### 场景 B：已定位到单项目
-
-1. 先看 `docs/projects/<project>/`
-2. 再看 `skills/<project>/<scene>/`
-3. 再进入 `sources/<project>/`
-
-### 场景 C：要扩展模板体系
-
-1. 先看 `scripts/`
-2. 再看 `docs/templates/`
-3. 再看 `skills/_templates/`
-
-## 5. 维护要求
-
-1. 新增文档、skill、脚本或参考资料后，应同步更新本索引。
-2. 若入口路径、优先级或阅读顺序失效，应优先修正本索引。
-3. 本索引只做入口和优先级说明，不替代具体文档正文。
+2. 与当前问题直接相关的具体资料

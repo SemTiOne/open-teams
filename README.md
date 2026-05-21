@@ -1,62 +1,59 @@
-# Best Practice Workspace Template
+# 通用工作空间壳工程
 
-本目录是一个可跨产品、跨业务复用的工作空间模板库。
+## 1. 定位
 
-目标：
+本目录是一个可跨业务线复用的工作空间壳工程模板，用于快速初始化新的 AI 协作研发工作空间。
 
-- 提供统一的非源码资产组织方式
-- 提供可复用的文档模板、skill 模板与执行约束
-- 提供面向真实项目落地的资产化工作流骨架
+目标是提供一套通用骨架，而不是复制当前业务线的现成项目资产。
 
-## 适用场景
+## 2. 适用场景
 
-- 需要为新产品线或新业务线快速搭建 AI 协作工作空间
-- 需要建立“docs + skills + references + scripts” 的非源码资产体系
-- 需要把项目研发经验沉淀为可持续复用的模板库
+- 新业务线准备建设 AI 协作工作空间
+- 需要统一文档、skills、参考资料、任务计划与变更历史的组织方式
+- 需要保留“方案确认 -> 实施计划 -> 节点验收 -> 资料沉淀”的治理闭环
 
-## 建议阅读顺序
+## 3. 不包含内容
 
-1. `AGENTS.md`
-2. `workspace-assets-index.md`
-3. `task-completion-checklist.md`
-4. `skills/README.md`
+- 当前业务线的真实源码
+- 当前业务线的项目级文档
+- 当前业务线的项目级 skill
+- 当前业务线的环境账号、测试地址或数据字典
 
-## 目录说明
+## 4. 目录结构
 
-- `docs/`：通用文档模板与项目文档模板
-- `skills/`：项目化、场景化 skill 模板
-- `references/`：模板参考资料和占位示例
-- `scripts/`：模板初始化脚本
-- `change-history/`：任务级历史记录模板
-- `task-plans/`：方案记录模板
+- `AGENTS.md`：工作空间级 AI 协作约束模板
+- `workspace-assets-index.md`：非源码资产入口模板
+- `task-completion-checklist.md`：任务收尾闭环检查模板
+- `docs/`：通用文档入口与占位结构
+- `skills/_templates/`：项目场景 skill 模板
+- `workspace-config/`：机器可读工作空间配置模板
+- `references/`：可补充的外围事实模板
+- `scripts/`：初始化与自检脚本
+- `task-plans/`：已确认方案与实施计划归档目录
+- `change-history/`：已完成任务历史归档目录
+- `example-project/`：示例项目资产占位
 
-## 快速开始
+## 5. 推荐初始化顺序
 
-1. 复制本目录作为新工作空间基础骨架。
-2. 先阅读 `AGENTS.md`、`workspace-assets-index.md` 和 `task-completion-checklist.md`。
-3. 按真实项目情况补齐：
-   - `docs/projects/<project>/`
-   - `skills/<project>/<scene>/`
-   - `references/` 中的真实外围资料
-4. 使用 `scripts/init_project_skills.py` 初始化某个项目的 scene skill 目录。
-5. 以 `example-project/` 为参考，替换所有占位符为真实项目事实。
+1. 复制本目录到目标业务线工作空间
+2. 按实际业务调整 `AGENTS.md`
+3. 补齐 `workspace-config/code-sources.yaml`
+4. 按项目创建 `docs/projects/` 与 `skills/<project>/`
+5. 用 `scripts/init_project_skills.py` 初始化新项目 skill 骨架
+6. 按真实源码持续补齐文档与执行型 skill
 
-## 初始化示例
+## 6. 初始化必做清单
 
-为一个前端项目 `sample-web` 初始化 skill 目录：
+- 将 `AGENTS.md` 中与当前业务线不符的约束、目录说明和协作边界替换为真实内容
+- 将 `workspace-config/code-sources.yaml` 中的示例仓库替换为真实仓库映射
+- 明确当前工作空间采用“`sources/` 同仓托管”还是“外部仓库映射”模式
+- 为首批目标项目补齐 `docs/projects/<project>/` 与 `skills/<project>/`
+- 用 `scripts/init_project_skills.py <template_root> <project_slug>` 初始化标准场景 skill
+- 首次投入使用前，运行 `scripts/validate_template_layout.py` 做结构校验
+- 若任务要求严格节点验收，先确认 `task-plans/TEMPLATE.md` 与 `change-history/TEMPLATE.md` 是否满足本业务线记录要求
 
-```bash
-python3 scripts/init_project_skills.py sample-web --project-type frontend
-```
+## 7. 验收标准
 
-为一个后端项目 `sample-api` 初始化 skill 目录：
-
-```bash
-python3 scripts/init_project_skills.py sample-api --project-type backend
-```
-
-## 使用原则
-
-- 模板只提供结构、方法和占位内容，不应直接承载真实业务事实。
-- 所有项目事实、接口边界、运行约束、环境信息都必须基于目标业务的真实代码和真实资料填写。
-- 若模板与实际项目现状冲突，应优先以实际项目为准，再回补修正文档和 skill。
+- 可独立作为新工作空间的起点目录
+- 不依赖当前业务线专有目录与专有名词
+- 目录职责清晰，可按需扩展
