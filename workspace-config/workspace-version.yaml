@@ -1,0 +1,39 @@
+template:
+  id: open-teams
+  version: 0.2.0
+  revision: workflow-skills-baseline
+  source: local-template
+
+workspace:
+  adoption_mode: template
+  source_strategy: undecided
+  last_upgrade_at: 2026-05-26
+  local_customization_notes:
+    - 通用模板仓库，不包含业务线专有事实。
+
+applied_capabilities:
+  - id: workflow-skills
+    status: applied
+    summary: 工作空间级 workflow skill 分层、路由与必备章节规范
+  - id: workflow-validation
+    status: applied
+    summary: 模板校验覆盖 workflow skill 文件、章节、入口登记与模板卫生
+  - id: gradual-ai-collaboration-adoption
+    status: applied
+    summary: 支持新建工作空间和存量传统工程渐进式 AI 协作转型
+  - id: workspace-upgrade-mechanism
+    status: applied
+    summary: 通过版本元信息、升级 workflow 和升级提示词支持 AI 交互式按需升级
+
+upgrade_policy:
+  mode: ai-prompt-driven
+  require_solution_confirmation: true
+  require_task_plan: true
+  require_node_acceptance: true
+  protect_local_customization: true
+  require_change_history: true
+
+upgrade_notes:
+  - 升级必须先由 AI 输出方案并等待用户确认。
+  - 不允许无确认覆盖业务线本地定制。
+  - 升级完成后必须验证并补充变更历史。

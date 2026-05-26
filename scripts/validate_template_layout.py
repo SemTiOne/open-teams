@@ -5,16 +5,21 @@ import sys
 
 
 REQUIRED_PATHS = [
+    ".gitignore",
     "README.md",
     "AGENTS.md",
     "workspace-assets-index.md",
     "task-completion-checklist.md",
     "docs/README.md",
+    "docs/development-specs/workflow-skills-design.md",
+    "docs/development-specs/workspace-upgrade-model.md",
+    "docs/development-specs/workspace-upgrade-prompts.md",
     "skills/README.md",
     "skills/_templates/project/scene-template/SKILL.md",
     "skills/_templates/project/scene-template/examples.md",
     "skills/_templates/project/scene-template/references/README.md",
     "workspace-config/code-sources.yaml",
+    "workspace-config/workspace-version.yaml",
     "workspace-config/README.md",
     "references/README.md",
     "scripts/init_project_skills.py",
@@ -23,15 +28,79 @@ REQUIRED_PATHS = [
     "sources/README.md",
 ]
 
+REQUIRED_WORKFLOWS = [
+    "solution-confirmation",
+    "writing-implementation-plan",
+    "systematic-debugging",
+    "verification-before-completion",
+    "branch-and-worktree-workflow",
+    "workspace-upgrade",
+]
+
+REQUIRED_SKILL_SECTIONS = [
+    "## 适用范围",
+    "## 触发条件",
+    "## 前置输入",
+    "## 产物与退出条件",
+    "## 工作流程",
+    "## 验证清单",
+    "## 禁止事项",
+    "## 按需资料",
+]
+
 
 def main() -> int:
     root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
-    missing = [item for item in REQUIRED_PATHS if not (root / item).exists()]
+    required_paths = REQUIRED_PATHS + [
+        f"skills/_workflow/{workflow}/SKILL.md" for workflow in REQUIRED_WORKFLOWS
+    ]
+    missing = [item for item in required_paths if not (root / item).exists()]
     if missing:
         print("missing required paths:")
         for item in missing:
             print(f"- {item}")
         return 1
+
+    invalid_skills = []
+    for workflow in REQUIRED_WORKFLOWS:
+        path = root / "skills" / "_workflow" / workflow / "SKILL.md"
+        content = path.read_text(encoding="utf-8")
+        missing_sections = [
+            section for section in REQUIRED_SKILL_SECTIONS if section not in content
+        ]
+        if missing_sections:
+            invalid_skills.append((path.relative_to(root), missing_sections))
+
+    if invalid_skills:
+        print("workflow skills missing required sections:")
+        for path, sections in invalid_skills:
+            print(f"- {path}: {', '.join(sections)}")
+        return 1
+
+    skills_index = (root / "skills" / "README.md").read_text(encoding="utf-8")
+    unregistered = [
+        workflow
+        for workflow in REQUIRED_WORKFLOWS
+        if f"./_workflow/{workflow}/SKILL.md" not in skills_index
+    ]
+    if unregistered:
+        print("workflow skills missing from skills/README.md:")
+        for workflow in unregistered:
+            print(f"- {workflow}")
+        return 1
+
+    gitignore = (root / ".gitignore").read_text(encoding="utf-8").splitlines()
+    if ".DS_Store" not in gitignore:
+        print("missing .DS_Store ignore rule in .gitignore")
+        return 1
+
+    ignored_files = [path.relative_to(root) for path in root.rglob(".DS_Store")]
+    if ignored_files:
+        print("template contains ignored system files:")
+        for path in ignored_files:
+            print(f"- {path}")
+        return 1
+
     print("Template layout validation passed.")
     return 0
 
