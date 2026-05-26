@@ -24,10 +24,12 @@
 ## 4. 目录结构
 
 - `AGENTS.md`：工作空间级 AI 协作约束模板
+- `CHANGELOG.md`：用户可读的模板版本记录
 - `workspace-assets-index.md`：非源码资产入口模板
 - `task-completion-checklist.md`：任务收尾闭环检查模板
 - `docs/`：通用文档入口与占位结构
 - `docs/development-specs/workflow-skills-design.md`：流程 skill 与项目场景 skill 的边界及编写规范
+- `docs/development-specs/workspace-versioning.md`：版本号规则、版本记录格式与版本资产关系
 - `docs/development-specs/workspace-upgrade-model.md`：工作空间版本维护与升级模型
 - `docs/development-specs/workspace-upgrade-prompts.md`：可复制的 AI 升级交互提示词
 - `skills/_workflow/`：工作空间级通用流程 skill
@@ -77,6 +79,8 @@
 
 本模板支持提示词驱动的工作空间按需升级。业务工作空间可通过 `workspace-config/workspace-version.yaml` 记录当前模板基线和已应用能力，再使用 [工作空间升级提示词](./docs/development-specs/workspace-upgrade-prompts.md) 触发 AI 检查、规划和实施升级。
 
+用户可通过 [CHANGELOG.md](./CHANGELOG.md) 了解每个模板版本新增了什么、升级影响和推荐升级提示词；版本规则见 [工作空间版本规则](./docs/development-specs/workspace-versioning.md)。
+
 升级必须遵循以下边界：
 
 - 先输出升级方案，获得用户确认后再修改文件。
@@ -105,6 +109,7 @@
 - 为首批目标项目补齐 `docs/projects/<project>/` 与 `skills/<project>/`
 - 用 `scripts/init_project_skills.py <template_root> <project_slug>` 初始化标准场景 skill
 - 首次投入使用前，运行 `scripts/validate_template_layout.py` 校验必需结构、workflow skills、入口登记与模板卫生
+- 需要持续升级时，先阅读 `CHANGELOG.md` 判断版本差异，再使用升级提示词触发 AI 检查和规划
 - 若任务要求严格节点验收，先确认 `task-plans/TEMPLATE.md` 与 `change-history/TEMPLATE.md` 是否满足本业务线记录要求
 
 ## 10. 验收标准
@@ -113,4 +118,5 @@
 - 不依赖当前业务线专有目录与专有名词
 - 目录职责清晰，可按需扩展
 - 通用 workflow skills 可从入口定位，且具备触发、产物、验证与退出条件
+- 用户可通过 `CHANGELOG.md` 感知每个模板版本的能力变化和升级影响
 - `scripts/validate_template_layout.py` 能识别缺失的流程资产、升级资产、入口登记或模板卫生问题

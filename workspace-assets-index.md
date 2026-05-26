@@ -2,10 +2,11 @@
 
 ## 首读入口
 
-1. `docs/README.md`
-2. `skills/README.md`
-3. `workspace-config/code-sources.yaml`
-4. `task-completion-checklist.md`
+1. `CHANGELOG.md`
+2. `docs/README.md`
+3. `skills/README.md`
+4. `workspace-config/code-sources.yaml`
+5. `task-completion-checklist.md`
 
 ## 初始化必做清单
 
@@ -61,7 +62,9 @@
 
 ### 版本维护与升级
 
-1. `workspace-config/workspace-version.yaml`
-2. `docs/development-specs/workspace-upgrade-model.md`
-3. `docs/development-specs/workspace-upgrade-prompts.md`
-4. `skills/_workflow/workspace-upgrade/SKILL.md`
+1. `CHANGELOG.md`
+2. `workspace-config/workspace-version.yaml`
+3. `docs/development-specs/workspace-versioning.md`
+4. `docs/development-specs/workspace-upgrade-model.md`
+5. `docs/development-specs/workspace-upgrade-prompts.md`
+6. `skills/_workflow/workspace-upgrade/SKILL.md`

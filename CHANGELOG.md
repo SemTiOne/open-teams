@@ -1,0 +1,83 @@
+# 版本记录
+
+本文件面向工作空间使用者记录模板版本变化，帮助判断每个版本新增了什么、是否需要升级以及如何通过 AI 提示词完成升级。
+
+版本号规则见 [工作空间版本规则](./docs/development-specs/workspace-versioning.md)。机器可读的当前版本和已应用能力见 [workspace-version.yaml](./workspace-config/workspace-version.yaml)。
+
+## 0.3.0 - 2026-05-26
+
+### 新增能力
+
+- 新增工作空间版本维护与提示词驱动升级机制。
+- 新增 `workspace-config/workspace-version.yaml`，记录模板版本、已应用能力、升级策略和本地定制说明。
+- 新增 `workspace-upgrade` workflow skill，用于检查、规划、实施和收口工作空间升级。
+- 新增工作空间升级提示词，覆盖升级检查、计划生成、节点实施、完成验证、复盘和版本元信息维护。
+- 模板校验脚本新增升级资产检查，能识别缺失升级模型、提示词、版本元信息或升级 skill 章节不完整。
+
+### 升级影响
+
+- 基于旧模板的业务工作空间可以按需引入版本元信息和升级提示词，不需要搬迁原有源码。
+- 初始化新工作空间时，应按业务线情况调整 `workspace-config/workspace-version.yaml`。
+- 后续新增模板能力时，应同步更新本文件、`workspace-version.yaml` 和相关入口。
+
+### 兼容性
+
+- 不涉及业务代码或接口行为变化。
+- 对已有业务工作空间的影响取决于是否选择应用该版本能力。
+
+### 推荐升级提示词
+
+```text
+请检查当前工作空间是否需要升级到 open-teams 0.3.0 的版本维护与提示词驱动升级机制。
+
+要求：
+1. 先读取 workspace-assets-index.md、task-completion-checklist.md 和 workspace-config/workspace-version.yaml。
+2. 识别当前工作空间类型、已应用能力、本地定制和潜在风险。
+3. 只输出升级差异、可选升级项、推荐方案和风险，不要修改文件。
+4. 等我确认方案后再进入实施。
+```
+
+## 0.2.0 - 2026-05-26
+
+### 新增能力
+
+- 新增工作空间级 workflow skill 分层，区分跨项目流程门禁和项目场景事实。
+- 新增五类基础 workflow skills：方案确认、实施计划、系统化排错、完成前验证、分支与工作树流程。
+- 新增工作空间流程 skill 设计规范，定义 workflow skill 与项目场景 skill 的职责边界和必备章节。
+- 增强模板校验脚本，检查 workflow skill 文件、必备章节、入口登记和模板卫生。
+- 支持新建工作空间和存量传统工程渐进式 AI 协作转型两种采用方式。
+
+### 升级影响
+
+- 业务工作空间可按需引入 `skills/_workflow/`，将通用任务推进流程从长规则拆成可触发的 skill。
+- 项目场景 skill 模板新增触发条件、前置输入、产物与退出条件、验证清单等章节。
+- 根 README、`AGENTS.md` 和资产索引需要同步承认 workflow skill 层。
+
+### 兼容性
+
+- 不涉及业务代码或接口行为变化。
+- 若业务工作空间已有自定义 `AGENTS.md`，升级时必须先保护本地约束，再合并 workflow 层说明。
+
+### 推荐升级提示词
+
+```text
+请检查当前工作空间是否需要升级到 open-teams 0.2.0 的 workflow skills 基线能力。
+
+要求：
+1. 对照 skills/README.md、docs/development-specs/workflow-skills-design.md 和 skills/_workflow/。
+2. 列出缺失、过时或与 AGENTS.md 不自洽的地方。
+3. 给出最小升级方案和验证方式。
+4. 不要修改文件，先等我确认。
+```
+
+## 0.1.0 - 2026-05-16
+
+### 初始能力
+
+- 提供通用 AI 协作工作空间壳工程骨架。
+- 提供 `docs/`、`skills/`、`references/`、`workspace-config/`、`task-plans/` 和 `change-history/` 基础目录。
+- 提供项目场景 skill 模板和模板结构校验脚本。
+
+### 兼容性
+
+- 作为基础模板版本，不包含工作空间级 workflow skill 和版本升级机制。

@@ -6,12 +6,14 @@ import sys
 
 REQUIRED_PATHS = [
     ".gitignore",
+    "CHANGELOG.md",
     "README.md",
     "AGENTS.md",
     "workspace-assets-index.md",
     "task-completion-checklist.md",
     "docs/README.md",
     "docs/development-specs/workflow-skills-design.md",
+    "docs/development-specs/workspace-versioning.md",
     "docs/development-specs/workspace-upgrade-model.md",
     "docs/development-specs/workspace-upgrade-prompts.md",
     "skills/README.md",
