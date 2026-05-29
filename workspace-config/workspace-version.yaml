@@ -1,7 +1,7 @@
 template:
   id: open-teams
-  version: 0.3.0
-  revision: workspace-upgrade-mechanism
+  version: 0.3.1
+  revision: implementation-plan-confirmation-gate
   source: local-template
   changelog_path: CHANGELOG.md
   versioning_doc_path: docs/development-specs/workspace-versioning.md
@@ -29,6 +29,12 @@ applied_capabilities:
   - id: user-readable-version-records
     status: applied
     summary: 通过 CHANGELOG 和版本规则说明让用户感知每个模板版本变化
+  - id: implementation-plan-confirmation-gate
+    status: applied
+    summary: 实施计划必须经用户确认后才能进入实施阶段
+  - id: sources-gitignore-protection
+    status: applied
+    summary: 默认忽略 sources 下真实业务源码，仅保留 sources/README.md
 
 upgrade_policy:
   mode: ai-prompt-driven

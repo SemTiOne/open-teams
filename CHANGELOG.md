@@ -4,6 +4,24 @@
 
 版本号规则见 [工作空间版本规则](./docs/development-specs/workspace-versioning.md)。机器可读的当前版本和已应用能力见 [workspace-version.yaml](./workspace-config/workspace-version.yaml)。
 
+## 0.3.1 - 2026-05-29
+
+### 调整内容
+
+- 强化实施计划确认门禁：方案确认后必须先落地实施计划，且实施计划经用户明确确认后才能进入实施阶段。
+- 清理 `example-project/` 示例目录，降低模板初始化后的误导和维护噪音。
+- 更新 `.gitignore`，默认忽略 `sources/` 下真实业务源码，仅保留 `sources/README.md`，避免业务代码污染工作空间模板仓库。
+
+### 升级影响
+
+- AI 任务推进顺序更严格：`方案确认 -> 计划落档 -> 用户确认实施计划 -> 实施节点`。
+- 已初始化业务工作空间如使用 `sources/` 托管真实源码，应确认 `.gitignore` 保留 `sources/README.md` 例外。
+
+### 兼容性
+
+- 不涉及业务代码或接口行为变化。
+- 对已有业务工作空间的主要影响是协作流程门禁更严格。
+
 ## 0.3.0 - 2026-05-26
 
 ### 新增能力

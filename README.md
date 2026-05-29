@@ -40,7 +40,6 @@
 - `scripts/`：初始化与自检脚本
 - `task-plans/`：已确认方案与实施计划归档目录
 - `change-history/`：已完成任务历史归档目录
-- `example-project/`：示例项目资产占位
 
 ## 5. 内置工作流程
 
@@ -84,7 +83,7 @@
 升级必须遵循以下边界：
 
 - 先输出升级方案，获得用户确认后再修改文件。
-- 先将升级计划写入 `task-plans/`，再按节点实施。
+- 先将升级计划写入 `task-plans/`，经用户确认实施计划后再按节点实施。
 - 保护业务线本地定制和真实源码映射，不用模板示例覆盖。
 - 每个节点完成后等待用户验收。
 - 升级完成后运行模板校验，并补充复盘与 `change-history/`。
@@ -106,6 +105,7 @@
 - 将 `workspace-config/code-sources.yaml` 中的示例仓库替换为真实仓库映射
 - 按当前业务线情况调整 `workspace-config/workspace-version.yaml` 的采用方式、本地定制说明与已应用能力
 - 明确当前工作空间采用“`sources/` 同仓托管”还是“外部仓库映射”模式
+- 若使用 `sources/` 接入真实业务源码，默认只保留 `sources/README.md`，真实源码目录不提交到模板仓库
 - 为首批目标项目补齐 `docs/projects/<project>/` 与 `skills/<project>/`
 - 用 `scripts/init_project_skills.py <template_root> <project_slug>` 初始化标准场景 skill
 - 首次投入使用前，运行 `scripts/validate_template_layout.py` 校验必需结构、workflow skills、入口登记与模板卫生
