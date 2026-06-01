@@ -1,7 +1,7 @@
 template:
   id: open-teams
-  version: 0.3.0
-  revision: workspace-upgrade-mechanism
+  version: 0.4.1
+  revision: node-level-version-maintenance-gate
   source: local-template
   changelog_path: CHANGELOG.md
   versioning_doc_path: docs/development-specs/workspace-versioning.md
@@ -9,7 +9,7 @@ template:
 workspace:
   adoption_mode: template
   source_strategy: undecided
-  last_upgrade_at: 2026-05-26
+  last_upgrade_at: 2026-06-01
   local_customization_notes:
     - 通用模板仓库，不包含业务线专有事实。
 
@@ -29,6 +29,21 @@ applied_capabilities:
   - id: user-readable-version-records
     status: applied
     summary: 通过 CHANGELOG 和版本规则说明让用户感知每个模板版本变化
+  - id: implementation-plan-confirmation-gate
+    status: applied
+    summary: 实施计划必须经用户确认后才能进入实施阶段
+  - id: sources-gitignore-protection
+    status: applied
+    summary: 默认忽略 sources 下真实业务源码，仅保留 sources/README.md
+  - id: ai-guided-workspace-adoption
+    status: applied
+    summary: 通过 QUICKSTART 提示词和 adopt_workspace 脚本支持 AI 对话式复制、清理、初始化和校验
+  - id: template-history-cleanup
+    status: applied
+    summary: 通过模板采用清理指南和 prepare_clean_workspace 脚本避免模板自身 task-plans 与 change-history 污染业务工作空间
+  - id: node-level-version-maintenance-gate
+    status: applied
+    summary: 节点验收后必须先提交推送工作空间和适用 sources 仓库改动，再进入下一节点
 
 upgrade_policy:
   mode: ai-prompt-driven
