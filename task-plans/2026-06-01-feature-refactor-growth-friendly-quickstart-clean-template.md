@@ -78,7 +78,7 @@
 | --- | --- | --- | --- |
 | 节点 1 | 推广友好入口与价值表达优化 | 已验收 | 验收通过 |
 | 节点 2 | 极简上手路径与初始化指引优化 | 已验收 | 验收通过 |
-| 节点 3 | 模板去污染边界与辅助机制 | 未开始 | 未验收 |
+| 节点 3 | 模板去污染边界与辅助机制 | 已验收 | 验收通过 |
 | 节点 4 | 校验、版本记录、变更历史与收口 | 未开始 | 未验收 |
 
 状态说明：
@@ -142,7 +142,7 @@
 #### 节点 3
 
 - 节点名称：模板去污染边界与辅助机制
-- 当前状态：`未开始`
+- 当前状态：`已验收`
 - 目标：
   - 避免用户创建业务工作空间时继承 open-teams 模板自身迭代记录，明确应保留、应重置、应清理的资产边界。
 - 前置条件：
@@ -158,11 +158,11 @@
 - 验收标准：
   - 用户能明确知道哪些模板资产复制后应保留、重置或删除。
   - 不会默认把模板自身任务计划和变更历史误当成业务项目事实。
-- 完成说明：
-- 验证结果：
-- 遗留事项：
-- 用户验收结论：
-- 用户验收时间：
+- 完成说明：已将快速上手和模板去污染方案调整为 AI 对话式采用：`QUICKSTART.md` 改为让用户复制提示词给 AI，由 AI 确认目标目录、项目名称、源码路径和采用方式；新增 `scripts/adopt_workspace.py`，支持 AI 将模板复制到目标目录、调用 `prepare_clean_workspace.py --apply` 清理模板自身历史记录、写入 `workspace-config/code-sources.yaml`、更新 `workspace-config/workspace-version.yaml` 并运行模板校验；同步更新 `README.md`、`workspace-assets-index.md`、`docs/development-specs/template-adoption-cleanup.md` 和 `scripts/validate_template_layout.py`，让 AI 复制、清理、初始化与校验路径可发现、可执行、可校验。
+- 验证结果：已运行 `python3 scripts/validate_template_layout.py .`，输出 `Template layout validation passed.`；已运行 `python3 scripts/adopt_workspace.py --help`，确认参数说明可用；已在临时目录运行 `scripts/adopt_workspace.py --template-root . --target <tmp>/demo-workspace --project-slug demo-app --project-name \"Demo App\" --source-path /tmp/demo-app --default-branch main`，确认脚本完成模板复制、清理 `task-plans/YYYY-*.md` 和 `change-history/open-teams/`、保留 `task-plans/README.md`、`task-plans/TEMPLATE.md`、`change-history/README.md`、`change-history/TEMPLATE.md`、写入源码映射、更新版本元信息，并通过目标工作空间模板校验。
+- 遗留事项：`adopt_workspace.py` 已覆盖复制、清理、源码映射、版本元信息和校验；`AGENTS.md` 的业务线专属约束仍需 AI 在初始化对话中结合用户团队规则继续改写，不在脚本中强行生成。
+- 用户验收结论：用户明确回复“验收通过”。
+- 用户验收时间：2026-06-01
 
 #### 节点 4
 
@@ -227,17 +227,18 @@
 
 | 日期 | 调整内容 | 调整原因 | 是否已获用户确认 | 文档是否已同步 |
 | --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+| 2026-06-01 | 将快速上手与模板复制方式从“用户手动复制、手动清理、手动初始化”调整为“AI 对话式复制模板、清理模板历史、写入源码映射、更新版本元信息并运行校验” | 用户要求快速上手通过 AI 对话完成，且复制模板也交给 AI 来完成，以进一步降低采用难度 | 是，用户回复“确认” | 是 |
 
 ## 7. 完成判定
 
-- 是否已完成全部实施节点：否，节点 1 已验收并完成提交推送，节点 2 已验收，节点 3 至节点 4 尚未开始。
-- `task-plans` 文档状态是否已同步到最新：是，当前已记录已确认方案、已确认实施计划、节点 1 和节点 2 验收通过状态。
+- 是否已完成全部实施节点：否，节点 1、节点 2、节点 3 已验收，节点 4 尚未开始。
+- `task-plans` 文档状态是否已同步到最新：是，当前已记录已确认方案、已确认实施计划、节点 1、节点 2、节点 3 验收通过状态。
 - 是否仍存在未完成项 / 风险项：当前工作区存在进入本任务前已有未提交改动，后续实施需持续区分。
-- 最终完成结论：未完成，节点 2 已验收通过，待完成节点 2 版本维护后进入节点 3。
+- 最终完成结论：未完成，节点 3 已验收通过，待完成节点 3 版本维护后进入节点 4。
 
 ## 8. 备注
 
 - 后续补充：
   - 节点 1 已提交并推送到 `origin/codex/superpowers-workspace-improvements`，提交为 `a3869f6 Improve project README positioning`。
+  - 节点 2 已提交并推送到 `origin/codex/superpowers-workspace-improvements`，提交为 `996cefb Add quickstart adoption path`。
   - 本任务暂不涉及 `sources/` 下真实源码仓库，`sources` 提交推送不适用。

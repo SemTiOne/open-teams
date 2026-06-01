@@ -13,6 +13,7 @@ REQUIRED_PATHS = [
     "task-completion-checklist.md",
     "docs/README.md",
     "docs/development-specs/workflow-skills-design.md",
+    "docs/development-specs/template-adoption-cleanup.md",
     "docs/development-specs/workspace-versioning.md",
     "docs/development-specs/workspace-upgrade-model.md",
     "docs/development-specs/workspace-upgrade-prompts.md",
@@ -24,7 +25,9 @@ REQUIRED_PATHS = [
     "workspace-config/workspace-version.yaml",
     "workspace-config/README.md",
     "references/README.md",
+    "scripts/adopt_workspace.py",
     "scripts/init_project_skills.py",
+    "scripts/prepare_clean_workspace.py",
     "task-plans/TEMPLATE.md",
     "change-history/TEMPLATE.md",
     "sources/README.md",
@@ -89,6 +92,17 @@ def main() -> int:
         print("workflow skills missing from skills/README.md:")
         for workflow in unregistered:
             print(f"- {workflow}")
+        return 1
+
+    workspace_index = (root / "workspace-assets-index.md").read_text(encoding="utf-8")
+    if "docs/development-specs/template-adoption-cleanup.md" not in workspace_index:
+        print("template cleanup guide missing from workspace-assets-index.md")
+        return 1
+    if "scripts/prepare_clean_workspace.py" not in workspace_index:
+        print("clean workspace script missing from workspace-assets-index.md")
+        return 1
+    if "scripts/adopt_workspace.py" not in workspace_index:
+        print("adopt workspace script missing from workspace-assets-index.md")
         return 1
 
     gitignore = (root / ".gitignore").read_text(encoding="utf-8").splitlines()
