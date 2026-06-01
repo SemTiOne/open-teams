@@ -4,6 +4,39 @@
 
 版本号规则见 [工作空间版本规则](./docs/development-specs/workspace-versioning.md)。机器可读的当前版本和已应用能力见 [workspace-version.yaml](./workspace-config/workspace-version.yaml)。
 
+## 0.4.0 - 2026-06-01
+
+### 新增能力
+
+- 重构 README 首屏表达，突出 open-teams 的价值、适用人群、能力总览和 AI 协作资产化定位。
+- 新增 `QUICKSTART.md`，将快速上手调整为 AI 对话式采用：用户提供目标目录、项目名称、源码路径和采用方式，由 AI 完成复制、清理、初始化和校验。
+- 新增 `scripts/adopt_workspace.py`，支持 AI 将模板复制到目标工作空间、清理模板自身历史记录、写入源码映射、更新版本元信息并运行模板校验。
+- 新增 `scripts/prepare_clean_workspace.py` 和 `docs/development-specs/template-adoption-cleanup.md`，明确业务工作空间副本中应清理模板自身 `task-plans/YYYY-*.md` 与 `change-history/open-teams/`，避免模板迭代记录污染用户项目。
+- 更新资产索引、开发规范入口和模板校验脚本，使 AI 对话式采用、模板去污染指南和相关脚本成为可发现、可校验的模板能力。
+
+### 升级影响
+
+- 新用户可以优先通过 AI 对话完成模板复制和初始化，不再需要手动复制目录、判断历史记录清理范围或手写源码映射。
+- 已初始化业务工作空间可按需引入 `QUICKSTART.md`、`template-adoption-cleanup.md`、`adopt_workspace.py` 和 `prepare_clean_workspace.py`，但引入前应保护本地 `AGENTS.md`、源码映射和版本元信息。
+- 模板校验新增对 AI 采用脚本与去污染指南登记的检查。
+
+### 兼容性
+
+- 不涉及业务代码或接口行为变化。
+- 对既有业务工作空间是可选增强；采用时需由 AI 先输出方案并等待用户确认，避免覆盖本地定制。
+
+### 推荐升级提示词
+
+```text
+请检查当前工作空间是否需要升级到 open-teams 0.4.0 的 AI 对话式采用与模板去污染能力。
+
+要求：
+1. 先读取 workspace-assets-index.md、QUICKSTART.md、workspace-config/workspace-version.yaml 和当前 AGENTS.md。
+2. 识别当前工作空间是否已经有本地初始化流程、源码映射、任务计划或变更历史。
+3. 只输出升级差异、推荐引入文件、需保护的本地定制和风险，不要修改文件。
+4. 等我确认方案和实施计划后，再按节点实施。
+```
+
 ## 0.3.1 - 2026-05-29
 
 ### 调整内容

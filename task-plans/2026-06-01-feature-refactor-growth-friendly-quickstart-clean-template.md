@@ -79,7 +79,7 @@
 | 节点 1 | 推广友好入口与价值表达优化 | 已验收 | 验收通过 |
 | 节点 2 | 极简上手路径与初始化指引优化 | 已验收 | 验收通过 |
 | 节点 3 | 模板去污染边界与辅助机制 | 已验收 | 验收通过 |
-| 节点 4 | 校验、版本记录、变更历史与收口 | 未开始 | 未验收 |
+| 节点 4 | 校验、版本记录、变更历史与收口 | 已验收 | 验收通过 |
 
 状态说明：
 
@@ -167,7 +167,7 @@
 #### 节点 4
 
 - 节点名称：校验、版本记录、变更历史与收口
-- 当前状态：`未开始`
+- 当前状态：`已验收`
 - 目标：
   - 完成本次优化的最终校验、版本记录、变更历史和任务收口。
 - 前置条件：
@@ -184,11 +184,11 @@
   - 版本记录、任务计划状态和变更历史同步。
 - 验收标准：
   - 本次优化具备可追溯记录，且没有引入无关文件漂移。
-- 完成说明：
-- 验证结果：
-- 遗留事项：
-- 用户验收结论：
-- 用户验收时间：
+- 完成说明：已完成最终收口：`CHANGELOG.md` 新增 `0.4.0` 版本记录，`workspace-config/workspace-version.yaml` 更新到 `0.4.0 / ai-guided-workspace-adoption` 并登记 `ai-guided-workspace-adoption`、`template-history-cleanup` 能力；新增 `change-history/open-teams/2026-06-01-feature-refactor-ai-guided-adoption.md` 记录任务级变更历史；已同步本文档节点 4 状态和节点 1 至节点 3 的提交推送记录。
+- 验证结果：已运行 `python3 scripts/validate_template_layout.py .`，输出 `Template layout validation passed.`；已运行 `python3 scripts/adopt_workspace.py --help`，确认参数说明可用；已在临时目录运行 `scripts/adopt_workspace.py --template-root . --target <tmp>/demo-workspace --project-slug demo-app --project-name \"Demo App\" --source-path /tmp/demo-app --default-branch main`，确认目标工作空间可完成模板复制、历史清理、源码映射写入、版本元信息更新和模板校验；已检索确认 `CHANGELOG.md`、`workspace-version.yaml`、README、QUICKSTART、资产索引、校验脚本和变更历史中 `0.4.0`、`adopt_workspace.py`、`prepare_clean_workspace.py`、`template-adoption-cleanup.md` 信息一致。
+- 遗留事项：当前工作区仍存在进入本任务前已有的 workflow skill 与 `task-plans/2026-05-29-feature-refactor-node-version-maintenance-gate.md` 脏改动，不属于本任务新增改动；节点 4 待用户验收通过后，再提交并推送本节点相关改动。
+- 用户验收结论：用户明确回复“验收通过”。
+- 用户验收时间：2026-06-01
 
 ## 5. 验证与验收计划
 
@@ -231,14 +231,15 @@
 
 ## 7. 完成判定
 
-- 是否已完成全部实施节点：否，节点 1、节点 2、节点 3 已验收，节点 4 尚未开始。
-- `task-plans` 文档状态是否已同步到最新：是，当前已记录已确认方案、已确认实施计划、节点 1、节点 2、节点 3 验收通过状态。
+- 是否已完成全部实施节点：是，节点 1 至节点 4 均已验收。
+- `task-plans` 文档状态是否已同步到最新：是，当前已记录已确认方案、已确认实施计划、节点 1 至节点 4 验收通过状态。
 - 是否仍存在未完成项 / 风险项：当前工作区存在进入本任务前已有未提交改动，后续实施需持续区分。
-- 最终完成结论：未完成，节点 3 已验收通过，待完成节点 3 版本维护后进入节点 4。
+- 最终完成结论：全部实施节点已验收通过，待完成节点 4 提交推送后进入最终完成确认与复盘判断。
 
 ## 8. 备注
 
 - 后续补充：
   - 节点 1 已提交并推送到 `origin/codex/superpowers-workspace-improvements`，提交为 `a3869f6 Improve project README positioning`。
   - 节点 2 已提交并推送到 `origin/codex/superpowers-workspace-improvements`，提交为 `996cefb Add quickstart adoption path`。
+  - 节点 3 已提交并推送到 `origin/codex/superpowers-workspace-improvements`，提交为 `87e8085 Add AI-guided workspace adoption`。
   - 本任务暂不涉及 `sources/` 下真实源码仓库，`sources` 提交推送不适用。
