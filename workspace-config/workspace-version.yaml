@@ -1,7 +1,7 @@
 template:
   id: open-teams
-  version: 0.4.0
-  revision: ai-guided-workspace-adoption
+  version: 0.4.1
+  revision: node-level-version-maintenance-gate
   source: local-template
   changelog_path: CHANGELOG.md
   versioning_doc_path: docs/development-specs/workspace-versioning.md
@@ -41,6 +41,9 @@ applied_capabilities:
   - id: template-history-cleanup
     status: applied
     summary: 通过模板采用清理指南和 prepare_clean_workspace 脚本避免模板自身 task-plans 与 change-history 污染业务工作空间
+  - id: node-level-version-maintenance-gate
+    status: applied
+    summary: 节点验收后必须先提交推送工作空间和适用 sources 仓库改动，再进入下一节点
 
 upgrade_policy:
   mode: ai-prompt-driven
