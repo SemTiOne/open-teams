@@ -4,10 +4,10 @@
 
 - 任务标题：工作空间版本记录机制
 - 日期：2026-05-26
-- 项目：`open-teams`
+- 项目：`<your-project>`
 - 任务类型：`feature-refactor`
 - 责任范围：用户可读版本记录、版本规则说明、版本元信息和校验接入
-- 对应目录 / 仓库：`/Users/qiang/github/open-teams`
+- 对应目录 / 仓库：`<workspace-root>/<your-project>`
 
 ## 2. 目标与背景
 
