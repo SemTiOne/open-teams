@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Discussions"
+    url: https://github.com/struggling-bird/open-teams/discussions
+    about: Ask questions, share ideas, and discuss with the community
+  - name: "Documentation"
+    url: https://github.com/struggling-bird/open-teams#readme
+    about: Check the README and docs first
