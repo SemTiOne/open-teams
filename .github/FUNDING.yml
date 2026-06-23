@@ -1,0 +1,40 @@
+# GitHub Sponsors Configuration
+
+# These are supported funding model platforms:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button
+
+# GitHub Sponsors — primary platform (no platform fees for the creator)
+github: struggling-bird
+
+# Open Collective — community-driven, transparent finances
+# open_collective: open-teams
+
+# Ko-fi — one-time donations, no fees
+# ko_fi: strugglingbird
+
+# Buy Me a Coffee — casual, low-friction support
+# buymeacoffee: strugglingbird
+
+# Patreon — recurring subscription model
+# patreon: strugglingbird
+
+# Custom URL — link to any other funding page
+# custom: ['https://example.com/sponsor']
+
+---
+
+# Notes on the choice:
+#
+# We recommend starting with GitHub Sponsors only for simplicity.
+# It's free to set up, has zero platform fees, and integrates natively
+# with the repo's sidebar (sponsor button + "Sponsor" badge).
+#
+# Once the project gains traction (1k+ stars), consider adding:
+# - Open Collective: for corporate sponsors who want transparent finances
+# - Ko-fi: for one-time "buy me a coffee" style support
+#
+# Steps to enable:
+# 1. Sign up for GitHub Sponsors at https://github.com/sponsors/YOUR_USERNAME
+# 2. Complete the sponsorship profile
+# 3. This FUNDING.yml file triggers the "Sponsor" button on the repo
+# 4. Also appears in the "Sponsor this project" sidebar
