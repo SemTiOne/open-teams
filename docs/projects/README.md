@@ -1,11 +1,32 @@
-# 项目文档入口模板
+# Projects
 
-按项目维护以下文档：
+Document project-specific information for each project in the workspace.
 
-- `源码说明文档.md`
-- `开发规范文档.md`
+## What Goes Here
+- Project overview and goals
+- Team composition and roles
+- Sprint planning and retrospectives
+- Project-specific conventions and decisions
 
-建议结构：
+## Naming Convention
+`project-name/` — one subdirectory per project
 
-- `docs/projects/<project>/源码说明文档.md`
-- `docs/projects/<project>/开发规范文档.md`
+## Subdirectory Structure
+```
+project-name/
+├── README.md          # Project overview
+├── team.md            # Team members and roles
+├── conventions.md     # Project-specific rules
+└── sprints/           # Sprint plans and retrospectives
+    └── sprint-01.md
+```
+
+## Project README Template
+```markdown
+# Project: [Name]
+- **Goal**: [One sentence]
+- **Tech Stack**: [List]
+- **Team**: [Members]
+- **Status**: [Active / Maintenance / Archived]
+- **Resources**: [Links to repo, docs, deployment]
+```
