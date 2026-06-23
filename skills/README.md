@@ -1,55 +1,85 @@
-# Skills 入口模板
+# Skills
 
-## 资产分层
+Skills are modular, AI-executable workflows that standardize how your team tackles common tasks. Each Skill is a self-contained directory that your AI tools can load on demand.
 
-Skills 分为两类：
+## Skill Categories
 
-| 类型 | 目录结构 | 用途 |
-| --- | --- | --- |
-| 工作空间流程 skill | `skills/_workflow/<workflow>/SKILL.md` | 承载跨项目通用的阶段门禁、执行流程与验证要求 |
-| 项目场景 skill | `skills/<project>/<scene>/SKILL.md` | 承载真实项目、模块或技术场景的具体路径与处理方法 |
+| Type | Directory | Purpose |
+|------|-----------|---------|
+| Workflow Skills | `skills/_workflow/<name>/SKILL.md` | Cross-project process gates: solution confirmation, implementation planning, debugging, verification |
+| Project Skills | `skills/<project>/<scene>/SKILL.md` | Project-specific workflows: new features, bug fixes, refactors, performance tuning |
 
-当前仓库已经提供项目场景 skill 模板和首批通用流程 skill。流程 skill 的结构与编写规范见 [流程 Skill 设计规范](../docs/development-specs/workflow-skills-design.md)。
+## Available Workflow Skills
 
-## 可用流程 Skill
+| Skill | Description |
+|-------|-------------|
+| `solution-confirmation` | Confirm scope, approach, and authorization before any implementation |
+| `writing-implementation-plan` | Break confirmed solutions into verifiable, step-by-step plans |
+| `systematic-debugging` | Reproduce and diagnose issues with evidence, not guesswork |
+| `verification-before-completion` | Validate results before claiming completion |
+| `branch-and-worktree-workflow` | Manage branches, worktrees, and version control discipline |
+| `workspace-upgrade` | Plan and execute workspace template upgrades safely |
 
-| 流程 skill | 入口 | 用途 |
-| --- | --- | --- |
-| `solution-confirmation` | [`skills/_workflow/solution-confirmation/SKILL.md`](./_workflow/solution-confirmation/SKILL.md) | 在任何实施前确认目标、范围、方案与授权 |
-| `writing-implementation-plan` | [`skills/_workflow/writing-implementation-plan/SKILL.md`](./_workflow/writing-implementation-plan/SKILL.md) | 将已确认方案拆为落档、可验收的节点计划 |
-| `systematic-debugging` | [`skills/_workflow/systematic-debugging/SKILL.md`](./_workflow/systematic-debugging/SKILL.md) | 以复现与证据定位异常根因并验证修复 |
-| `verification-before-completion` | [`skills/_workflow/verification-before-completion/SKILL.md`](./_workflow/verification-before-completion/SKILL.md) | 在节点或任务完成陈述前获得新鲜验证证据 |
-| `branch-and-worktree-workflow` | [`skills/_workflow/branch-and-worktree-workflow/SKILL.md`](./_workflow/branch-and-worktree-workflow/SKILL.md) | 确认开发分支、工作区边界与版本维护门禁 |
-| `workspace-upgrade` | [`skills/_workflow/workspace-upgrade/SKILL.md`](./_workflow/workspace-upgrade/SKILL.md) | 通过 AI 提示词检查、规划和执行工作空间按需升级 |
+## Creating a New Skill
 
-## 项目场景结构
+### Quick Start: Copy the Template
 
-统一使用以下结构：
+```bash
+# For a new project skill
+cp -r skills/_templates/project/scene-template skills/<your-project>/<your-scene>
+```
 
-- `skills/<project>/README.md`
-- `skills/<project>/<scene>/SKILL.md`
-- `skills/<project>/<scene>/references/`
-- `skills/<project>/<scene>/examples.md`
+### Required Structure
 
-推荐项目场景：
+Every Skill must have:
+```
+skills/<project>/<scene>/
+  SKILL.md          # Main skill file (required)
+  examples.md       # Usage examples (recommended)
+  references/       # Supporting documents (optional)
+    README.md
+```
 
-- `new-feature-dev`
-- `bugfix`
-- `security-fix`
-- `api-refactor`
-- `feature-refactor`
-- `performance-tuning`
+For workflow skills (cross-project processes):
+```
+skills/_workflow/<name>/
+  SKILL.md          # Main skill file (required)
+```
 
-## 流程路由
+### SKILL.md Required Sections
 
-| 任务类型或阶段 | 优先流程 skill | 项目场景 skill |
-| --- | --- | --- |
-| 需求澄清与方案确认 | `solution-confirmation` | 按需读取目标项目场景 |
-| 方案确认后的节点计划 | `writing-implementation-plan` | 与实施类型对应的项目场景 |
-| Bug 定位与修复 | `solution-confirmation`、`systematic-debugging`、`writing-implementation-plan`、`verification-before-completion` | `bugfix` |
-| 新功能、重构、性能或安全改造 | `solution-confirmation`、`writing-implementation-plan`、`verification-before-completion` | 对应推荐项目场景 |
-| 进入代码修改阶段 | `branch-and-worktree-workflow` | 与任务类型对应的项目场景 |
-| 节点汇报与整体收口 | `verification-before-completion` | 按需读取 |
-| 工作空间版本维护与升级 | `workspace-upgrade`、`solution-confirmation`、`writing-implementation-plan`、`verification-before-completion` | 按需读取 |
+Every `SKILL.md` must include:
 
-流程 skill 与 `AGENTS.md` 配套使用：`AGENTS.md` 提供工作空间最高优先级约束，流程 skill 提供对应阶段的执行步骤、证据与退出条件。
+1. **Title** — `# skill-name`
+2. **Purpose** — 1-2 sentences on what this skill accomplishes
+3. **When to Use** — Trigger conditions that activate this skill
+4. **Structure** — Brief description of supporting files (rules/, examples/, etc.)
+5. **Quick Example** — A 3-5 line concrete usage example
+6. **How to Customize** — Guidance for teams to adapt this skill
+
+Optional but recommended:
+- **Pre-requisites** — What must be known or available before using
+- **Output/Exit Conditions** — What constitutes completion
+- **Verification Checklist** — How to confirm the skill ran correctly
+
+### Naming Conventions
+
+- **Skill directories:** `kebab-case` (e.g., `code-review`, `api-design-review`)
+- **Project directories:** `snake_case` or `kebab-case` matching your project conventions
+- **Scene directories:** descriptive and action-oriented (e.g., `new-feature`, `bugfix`, `performance-tuning`)
+- **Files:** `SKILL.md` (capitalized, required), `checklist.md`, `examples.md`, `rules/README.md`
+
+### Best Practices
+
+1. **Keep skills focused** — One skill = one workflow. Don't make "mega-skills" that do everything.
+2. **Make examples concrete** — Show real commands, real file paths, real outputs. Abstract descriptions aren't helpful.
+3. **Design for composability** — Skills should chain together. `solution-confirmation` feeds into `writing-implementation-plan`, which feeds into verification.
+4. **Version with your project** — Skills live in your repo and evolve with your codebase.
+5. **Review and prune** — Remove outdated skills. Keep the set small and high-quality.
+
+## Project Skill Template
+
+The template at `skills/_templates/project/scene-template/` provides a starting structure:
+- `SKILL.md` — Template with all required sections
+- `examples.md` — Example usage patterns
+- `references/README.md` — Placeholder for supporting documents
