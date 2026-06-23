@@ -1,63 +1,40 @@
-# MEMORY.md — open-teams Team Memory
+# MEMORY.md — Team Long-Term Memory
 
-## Project Identity
+## Purpose
 
-- **Project:** open-teams — AI 协作工作空间模板
-- **Goal:** 10,000+ GitHub stars, 成为 AI 协作工作空间的行业标准
-- **License:** MIT
-- **Created:** 2026-05-15
+This file stores your team's key decisions, lessons learned, and architecture rationale across sessions. Your AI tools read MEMORY.md to maintain context about why things were built the way they were.
 
-## Key Decisions
+Think of it as your team's curated long-term memory — not a daily log, but the distilled wisdom that persists across sessions and team members.
 
-### Architecture
-- **Markdown + Git native** — AI 原生读 Markdown，Git 追踪一切
-- **Tool-agnostic** — 兼容 Cursor、Copilot、Claude Code、通义灵码
-- **Skills modular** — 每个 Skill 有 SKILL.md、rules、checklist、examples
-- **Dual-language** — README.md (EN) + README.zh-CN.md (ZH)
+## How to Use
 
-### Project Structure
-- AGENTS.md → 团队宪法（每次对话自动加载）
-- MEMORY.md → 长期记忆（决策与理由）
-- TOOLS.md → 环境配置（不共享上下文）
-- skills/ → 模块化 AI 工作流
-- memory/ → 每日协作纪要
-- docs/ → 团队文档
+- Write down significant architectural decisions and the reasoning behind them
+- Record lessons learned from successes and failures
+- Document project identity and team conventions
+- Update it after major milestones, pivots, or retrospectives
+- Keep it concise — this is for AI context, not exhaustive documentation
+- Review and prune periodically to keep context fresh
 
-### Community Files
-- CODE_OF_CONDUCT.md with reporting email: dong.stupidboy@gmail.com
-- SECURITY.md with security contact: dong.stupidboy@gmail.com
-- CONTRIBUTING.md with contribution guidelines
-- GitHub Discussions enabled (6 categories)
-- 10 Topics for discoverability
+## Template
 
-## Lessons Learned
+### Project Identity
+- **Project:** [name]
+- **Goal:** [mission statement]
+- **License:** [license]
+- **Created:** [YYYY-MM-DD]
 
-### 2026-06-23 — Repo Configuration
-- REST API cannot create Discussions categories → Use GraphQL
-- Issue Template "MISS" is GitHub cache delay — files are uploaded correctly
-- Python f-strings with special chars (…) in tokens fail HTTP headers → use string concat
-- Always verify after API mutations — Topics set via PATCH didn't take effect, needed PUT /topics endpoint
+### Key Decisions
+- **[YYYY-MM-DD]** — [Decision]: [Brief rationale and trade-offs considered]
+- ...
 
-### Content Strategy
-- Marketing files (articles, growth plan, review report) → NOT in repo, keep in open-teams-team/
-- Content published externally first, then tracked via links
-- Chinese developer community: Juejin → Zhihu → V2EX → CSDN
-- English: Dev.to → Medium → Hacker News → Reddit
+### Lessons Learned
+- **[YYYY-MM-DD]** — [Lesson]: [What happened, what we learned, what we'll do differently]
+- ...
 
-## Growth Milestones
+### Architecture Notes
+- [Pattern or convention]: [Why we use it, when to deviate]
+- ...
 
-| Date | Stars | Event |
-|------|-------|-------|
-| 2026-05-15 | 0 | Repository created |
-| 2026-06-23 | 5 | Full repo config complete, 100% health |
-| Target Q4'26 | 100 | Community traction |
-| Target Q1'27 | 500 | Organic growth + content marketing |
-| Target Q2'27 | 1,000+ | Platform effect |
-| Target 2027 | 10,000+ | Industry standard |
-
-## Contact
-
-- **Owner:** struggling-bird
-- **Email:** dong.stupidboy@gmail.com
-- **GitHub:** https://github.com/struggling-bird/open-teams
-- **Discussions:** https://github.com/struggling-bird/open-teams/discussions
+### Team
+- **Maintainers:** [names or handles]
+- **Repository:** [URL]
