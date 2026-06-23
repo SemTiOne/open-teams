@@ -1,48 +1,27 @@
 # Code Review Checklist
 
 ## Before You Start
-- [ ] Read the PR description / commit message
-- [ ] Understand the change's purpose
-- [ ] Check if related issues exist
+- [ ] Read the PR description or commit message
+- [ ] Understand the change's purpose and scope
+- [ ] Check if related issues or ADRs exist
 
 ## Security
 - [ ] No secrets, tokens, or passwords in code
 - [ ] User input is validated and sanitized
-- [ ] SQL queries use parameterization
 - [ ] Authentication/authorization on sensitive endpoints
-- [ ] No sensitive data in logs
+- [ ] No sensitive data in logs or error messages
 
 ## Correctness
-- [ ] Logic handles edge cases (null, empty, boundary)
+- [ ] Logic handles edge cases (null, empty, boundary values)
 - [ ] Error cases are handled gracefully
-- [ ] Race conditions considered (if concurrent)
-- [ ] Return types match expectations
+- [ ] Return types and contracts are consistent
 
-## Performance
-- [ ] Algorithm complexity is appropriate
-- [ ] No unnecessary database queries
-- [ ] Appropriate use of caching
-- [ ] No memory leaks (event listeners, timers, large objects)
-
-## Maintainability
-- [ ] Code is readable and self-documenting
-- [ ] Complex logic has comments
-- [ ] No magic numbers
-- [ ] Functions are small and focused
-- [ ] No duplicated code
+## Quality
+- [ ] Meaningful variable and function names
+- [ ] Functions are focused and reasonably sized
+- [ ] No commented-out or dead code
+- [ ] Complex logic has explanatory comments
 
 ## Testing
-- [ ] Tests cover the new functionality
-- [ ] Tests cover error paths
-- [ ] Test names describe what's being tested
-- [ ] No flaky tests
-
-## Style & Conventions
-- [ ] Follows project style guide
-- [ ] Consistent naming conventions
-- [ ] Proper formatting (linting passes)
-
-## Dependencies
-- [ ] New dependencies are justified
-- [ ] Versions are pinned
-- [ ] License compatibility
+- [ ] New code has corresponding tests
+- [ ] Edge cases and error paths are covered
