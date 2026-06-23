@@ -1,0 +1,41 @@
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer glow -->
+  <defs>
+    <linearGradient id="nodeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="circuitGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+
+  <!-- First node (workspace) -->
+  <rect x="6" y="26" width="54" height="54" rx="12" fill="url(#nodeGrad)"/>
+  <rect x="6" y="26" width="54" height="54" rx="12" stroke="#3B82F6" stroke-width="2.5"/>
+
+  <!-- Second node (collaboration) -->
+  <rect x="46" y="40" width="54" height="54" rx="12" fill="url(#nodeGrad)"/>
+  <rect x="46" y="40" width="54" height="54" rx="12" stroke="#10B981" stroke-width="2.5"/>
+
+  <!-- Circuit path inside first node -->
+  <circle cx="24" cy="44" r="3.5" fill="#F59E0B"/>
+  <path d="M28 44 L36 44" stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="40" cy="44" r="3.5" fill="#3B82F6"/>
+  <path d="M40 48 L40 54 L36 54" stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="32" cy="54" r="3.5" fill="#10B981"/>
+  <path d="M28 54 L24 54 L24 60" stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="24" cy="64" r="3.5" fill="#3B82F6"/>
+
+  <!-- Circuit path inside second node -->
+  <circle cx="64" cy="58" r="3.5" fill="#F59E0B"/>
+  <path d="M68 58 L78 58 L82 62" stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="82" cy="66" r="3.5" fill="#10B981"/>
+  <path d="M82 70 L82 78 L76 78" stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="72" cy="78" r="3.5" fill="#3B82F6"/>
+
+  <!-- Connection between nodes -->
+  <path d="M58 42 L58 36 M60 80 L60 87" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+</svg>
