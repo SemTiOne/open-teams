@@ -1,66 +1,27 @@
-# Code Review Rules
+# code-review Rules
 
-## Security Rules
-
-### SEC-001: No Hardcoded Secrets
+## SEC-001: No Hardcoded Secrets
 **Severity:** Critical
-Never commit secrets, API keys, tokens, or passwords. Use environment variables or a secrets manager.
+Never commit passwords, tokens, API keys, or private keys in source code.
 
-### SEC-002: SQL Injection Prevention
-**Severity:** Critical
-Always use parameterized queries. Never concatenate user input into SQL strings.
-
-### SEC-003: Input Validation
+## SEC-002: Input Validation
 **Severity:** High
-Validate all user input at the boundary. Use allowlists over blocklists. Validate type, length, format, and range.
+Validate all user and external inputs for type, length, format, and range.
 
-### SEC-004: XSS Prevention
-**Severity:** High
-Escape all user-controlled data in HTML. Use Content-Security-Policy headers. Prefer template engines with auto-escaping.
-
-### SEC-005: Auth Checks
-**Severity:** Critical
-Every endpoint that accesses protected data must verify authentication and authorization. Don't rely on client-side checks alone.
-
-## Performance Rules
-
-### PERF-001: N+1 Queries
-**Severity:** High
-Use eager loading, batch queries, or DataLoader patterns. Each loop iteration should not trigger a new database query.
-
-### PERF-002: Memory Leaks
+## QUAL-001: Meaningful Names
 **Severity:** Medium
-Clean up event listeners, timers, and subscriptions. Check for circular references. Use WeakMap/WeakRef where appropriate.
+Variables, functions, and classes should have self-explanatory names.
 
-### PERF-003: Appropriate Data Structures
-**Severity:** Medium
-Use `Set` for membership checks, `Map` for key-value lookups. Avoid O(n²) where O(n log n) is possible.
-
-## Code Quality Rules
-
-### QUAL-001: Function Size
+## QUAL-002: Focused Functions
 **Severity:** Low
-Functions should do one thing. Target < 50 lines. Extract helper functions for complex logic.
+Functions should do one thing well. Split large functions into smaller, testable units.
 
-### QUAL-002: Magic Numbers
-**Severity:** Low
-Use named constants instead of literal numbers. Exceptions: 0, 1, -1 in obvious contexts.
-
-### QUAL-003: Commented-Out Code
-**Severity:** Low
-Remove commented-out code before merging. Git history preserves it if needed.
-
-### QUAL-004: Error Handling
+## PERF-001: Avoid N+1 Queries
 **Severity:** High
-Don't swallow exceptions silently. Log with context. Provide meaningful error messages to users.
+Use eager loading, batch queries, or joins instead of looping database calls.
 
-## Python-Specific Rules
-
-### PY-001: Type Hints
-Use type hints on all public function signatures. Use `Optional[X]` not `Union[X, None]`.
-
-### PY-002: Context Managers
-Use `with` statements for file I/O, database connections, and locks.
-
-### PY-003: F-Strings
-Prefer f-strings over `.format()` for readability. Exception: logging uses `%s` for lazy evaluation.
+## Add Your Rules Below
+Customize with your team's code standards:
+- Framework-specific patterns
+- Language-specific conventions
+- Project-specific architectural constraints
