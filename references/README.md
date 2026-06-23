@@ -1,10 +1,31 @@
-# 参考资料入口模板
+# References
 
-本目录用于沉淀无法直接放入源码说明或 skill 的外围事实资料。
+External reference materials and research.
 
-示例：
+## What Goes Here
+- Links to relevant articles, papers, and documentation
+- Research notes and summaries
+- Industry reports and benchmarks
+- Third-party API documentation references
 
-- 数据字典
-- 报文字典
-- 测试环境信息
-- 第三方系统对接说明
+## Naming Convention
+`topic-name.md` — group related references in one file
+
+## Format
+```markdown
+# [Topic]
+
+## Articles
+- [Title](URL) — Key takeaways
+
+## Papers
+- [Title](URL) — Summary
+
+## Documentation
+- [Service Name](URL) — Relevant sections
+```
+
+## Notes
+- This is for EXTERNAL references, not internal docs
+- Internal docs go in `docs/`
+- Delete outdated references periodically
