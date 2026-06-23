@@ -1,9 +1,23 @@
-# `sources/` 目录说明
+# Sources
 
-本目录用于存放当前工作空间直接托管的真实业务源码。
+Primary source materials and raw data.
 
-使用说明：
+## What Goes Here
+- Raw data files (CSV, JSON, logs)
+- Meeting transcripts and recordings
+- Interview notes and user research raw data
+- Screenshots and screen recordings
+- Original documents before processing
 
-1. 若目标工作空间选择把源码直接纳入同仓维护，可按 `sources/<project>/` 组织。
-2. 若目标工作空间只维护治理资产，真实源码在外部仓库，则应在 `workspace-config/code-sources.yaml` 中维护代码源映射，并在相关文档中说明真实源码位置。
-3. `sources/` 不是模板资产或示例文档的存放位置，只用于真实代码源。
+## Naming Convention
+`YYYY-MM-DD-description.ext` — include date for traceability
+
+## Guidelines
+- **Processed content** goes in `docs/` — raw material stays here
+- **Large files** (>10MB) should use Git LFS or external storage
+- **Sensitive data** should NOT be committed — use `.gitignore`
+- **Clean up** periodically — sources are for reference, not permanent storage
+
+## Related
+- `docs/` — processed documentation
+- `references/` — external references (not primary sources)
