@@ -2,6 +2,10 @@
   <img src="assets/logo.svg" alt="open-teams logo" width="120" />
 </p>
 
+<p align="center">
+  <strong>English</strong> | <a href="README.zh-CN.md">中文</a>
+</p>
+
 <h1 align="center">open-teams</h1>
 
 <p align="center">
