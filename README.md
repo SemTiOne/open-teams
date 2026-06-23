@@ -1,141 +1,313 @@
-# open-teams
+<p align="center">
+  <img src="assets/logo.svg" alt="open-teams logo" width="120" />
+</p>
 
-一个面向真实研发团队的 AI 协作工作空间模板：把源码入口、项目文档、执行 skill、任务计划、验证证据和经验沉淀放进同一套可复用的工程壳里。
+<h1 align="center">open-teams</h1>
 
-如果你的团队已经在用 AI 写代码、排查问题或整理文档，但上下文散在聊天记录、个人笔记和临时提示词里，`open-teams` 解决的是另一件更基础的事：让 AI 协作从一次性对话变成可继承、可验证、可持续升级的团队资产。
+<p align="center">
+  <strong>The AI collaboration workspace template.</strong><br>
+  Turn AI from a one-shot tool into a <em>first-class team member</em> — with context, memory, and shared skills.
+</p>
 
-## 为什么值得用
+<p align="center">
+  <a href="https://github.com/struggling-bird/open-teams/stargazers">
+    <img src="https://img.shields.io/github/stars/struggling-bird/open-teams?style=flat-square&color=yellow" alt="Stars" />
+  </a>
+  <a href="https://github.com/struggling-bird/open-teams/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/struggling-bird/open-teams?style=flat-square&color=blue" alt="License: MIT" />
+  </a>
+  <a href="https://github.com/struggling-bird/open-teams/issues">
+    <img src="https://img.shields.io/github/issues/struggling-bird/open-teams?style=flat-square" alt="Issues" />
+  </a>
+  <a href="https://github.com/struggling-bird/open-teams/pulls">
+    <img src="https://img.shields.io/github/issues-pr/struggling-bird/open-teams?style=flat-square" alt="Pull Requests" />
+  </a>
+  <a href="https://github.com/struggling-bird/open-teams/discussions">
+    <img src="https://img.shields.io/github/discussions/struggling-bird/open-teams?style=flat-square&color=purple" alt="Discussions" />
+  </a>
+  <img src="https://img.shields.io/badge/workspace-Markdown%20%2B%20Git-green?style=flat-square" alt="Markdown + Git" />
+  <img src="https://img.shields.io/badge/AI%20tools-Cursor%20%7C%20Copilot%20%7C%20Claude--Code-blueviolet?style=flat-square" alt="Compatible with all AI coding tools" />
+</p>
 
-- **新项目能快速开局**：直接复制模板，就有 `docs/`、`skills/`、`workspace-config/`、`references/`、`task-plans/`、`change-history/` 等标准资产层。
-- **老项目能渐进接入**：不要求搬仓库、不要求重构现有研发流程，可先用 `workspace-config/code-sources.yaml` 映射真实代码源。
-- **AI 不再只靠临场发挥**：通过 workflow skills 固化方案确认、实施计划、系统化排错、完成前验证、分支与工作区边界等高频流程。
-- **任务交付更容易追溯**：方案、节点状态、验收结论、版本记录和变更历史都有明确位置，方便团队复盘和继续推进。
-- **模板能力可持续升级**：通过 `workspace-version.yaml`、`CHANGELOG.md` 和升级提示词，让业务工作空间按需吸收模板新能力。
+<p align="center">
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#why-open-teams">Why?</a> •
+  <a href="#features">Features</a> •
+  <a href="#project-structure">Structure</a> •
+  <a href="#comparison">Comparison</a> •
+  <a href="#roadmap">Roadmap</a> •
+  <a href="https://github.com/struggling-bird/open-teams/discussions">Discussions</a>
+</p>
 
-## 适合谁
+---
 
-- 正在给一个或多个项目建立 AI 协作规范的研发团队
-- 希望把项目知识、排错经验、交付规则沉淀成长期资产的技术负责人
-- 想让 AI 更稳定地参与需求分析、代码实施、联调排查和文档同步的个人开发者
-- 已有存量工程，但希望低风险逐步引入 AI 协作工作流的团队
+<!-- ANIMATED DEMO PLACEHOLDER -->
+<!--
+  Suggested GIF/demo content:
+  1. Clone open-teams → 2. Run init.sh → 3. Open in Cursor → 4. AI reads AGENTS.md automatically
+  5. Show AI using code-review skill → 6. Show MEMORY.md being updated after a session
 
-## 你会得到什么
+  Tools to create: Screen Studio (macOS), OBS Studio (cross-platform), or VHS (terminal GIFs)
+  Dimensions: 16:9, ~60s, keep under 10MB
+-->
 
-| 能力 | 目录或入口 | 作用 |
-| --- | --- | --- |
-| 工作空间总入口 | `workspace-assets-index.md` | 统一索引 docs、skills、references、配置与推荐阅读路径 |
-| AI 协作约束 | `AGENTS.md` | 约束方案确认、实施计划、节点验收、分支边界和收口流程 |
-| 项目文档层 | `docs/` | 沉淀架构、源码说明、开发规范和业务知识 |
-| 执行 skill 层 | `skills/` | 拆分通用 workflow skill 与项目场景 skill |
-| 源码映射 | `workspace-config/code-sources.yaml` | 记录真实项目仓库位置、默认分支和代码源策略 |
-| 任务计划 | `task-plans/` | 归档已确认方案、实施计划和节点状态 |
-| 变更历史 | `change-history/` | 记录完成任务的背景、改动、验证、复盘和资料同步 |
-| 模板校验 | `scripts/validate_template_layout.py` | 检查必需结构、workflow skill 登记和模板卫生 |
+---
 
-## 快速开始
+## Why open-teams?
 
-完整操作见 [快速上手](./QUICKSTART.md)。推荐方式是把目标目录、项目名称和源码路径告诉 AI，让 AI 完成复制模板、清理历史、写入配置和运行校验。
+Your team loves AI coding tools. Cursor, Copilot, Claude Code — everyone's using them. Productivity is up. But after a few sprints, you notice something:
 
-AI 可调用内置脚本完成主要初始化：
+- **Context vanishes.** Every new AI chat starts from zero. Yesterday's architecture decision? Gone.
+- **Standards diverge.** Five team members, five different Cursor rules. Code review is a style-war zone.
+- **Knowledge leaks.** Wang's killer prompt lives in his chat history. Li's debugging trick stays in her DMs. Nobody else benefits.
+- **Onboarding is manual.** Every new hire re-teaches AI from scratch. Two weeks before they're productive.
 
-```bash
-python3 scripts/adopt_workspace.py \
-  --template-root . \
-  --target <目标工作空间路径> \
-  --project-slug <项目标识> \
-  --project-name <项目名称> \
-  --source-path <真实源码路径或仓库地址>
+**The problem isn't the AI. It's the layer between the AI and the team.**
+
+open-teams is that layer — a lightweight, Git-native workspace template that gives your AI:
+
+- 🧠 **Memory** — so it remembers what happened last session
+- 📋 **Shared Standards** — so everyone's AI follows the same rules
+- 🔌 **Modular Skills** — reusable workflows for code review, API design, architecture review
+- 📝 **Knowledge Capture** — so insights become team assets, not lost chat history
+
+> **"Not a new AI tool. An operating system for how your team collaborates with AI."**
+
+---
+
+## Architecture Overview
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                  Your AI Coding Tool                      │
+│         (Cursor / Copilot / Claude Code / ...)            │
+└─────────────────────┬────────────────────────────────────┘
+                      │ reads & writes
+                      ▼
+┌──────────────────────────────────────────────────────────┐
+│                   open-teams Workspace                     │
+│                                                           │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐  │
+│  │  AGENTS.md   │  │  MEMORY.md   │  │  TOOLS.md       │  │
+│  │  Team        │  │  Long-term   │  │  Environment-   │  │
+│  │  Constitution│  │  Memory      │  │  specific Notes │  │
+│  └─────────────┘  └──────────────┘  └─────────────────┘  │
+│                                                           │
+│  ┌───────────────────────────────────────────────────┐   │
+│  │  Skills (Modular AI Workflows)                     │   │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────────────┐   │   │
+│  │  │code-     │ │api-design│ │architecture-     │   │   │
+│  │  │review/   │ │-review/  │ │review/           │   │   │
+│  │  │SKILL.md  │ │SKILL.md  │ │SKILL.md          │   │   │
+│  │  │rules/    │ │rules/    │ │rules/            │   │   │
+│  │  │examples/ │ │examples/ │ │examples/         │   │   │
+│  │  └──────────┘ └──────────┘ └──────────────────┘   │   │
+│  └───────────────────────────────────────────────────┘   │
+│                                                           │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐  │
+│  │  docs/       │  │  memory/      │  │  task-plans/   │   │
+│  │  Team Docs   │  │  Daily Notes  │  │  Sprint Plans  │   │
+│  └─────────────┘  └──────────────┘  └─────────────────┘  │
+└──────────────────────────────────────────────────────────┘
+                      │ version controlled
+                      ▼
+┌──────────────────────────────────────────────────────────┐
+│                       Git Repository                       │
+│    AI rules, memory, and skills — reviewed in PRs like code │
+└──────────────────────────────────────────────────────────┘
 ```
 
-初始化后，再让 AI 按需补 `AGENTS.md`、`docs/projects/<project>/` 和 `skills/<project>/`。
+**Key insight:** AI reads Markdown natively. Git tracks everything. Your AI's "brain" gets the same rigor as your codebase.
 
-## 内置工作流程
+---
 
-本模板提供以下工作空间级 workflow skills，并与 `AGENTS.md` 的确认和验收约束配套使用：
+## Features
 
-| 流程 skill | 作用 |
-| --- | --- |
-| `solution-confirmation` | 在实施前澄清目标、范围、方案与授权 |
-| `writing-implementation-plan` | 将已确认方案落地为可执行、可验收的节点计划 |
-| `systematic-debugging` | 以复现和证据定位异常根因并指导修复验证 |
-| `verification-before-completion` | 在报告完成前核对改动范围、验证结果与风险 |
-| `branch-and-worktree-workflow` | 明确分支、工作区边界与版本维护门禁 |
-| `workspace-upgrade` | 通过 AI 提示词检查、规划和执行工作空间按需升级 |
+| Feature | Description | Impact |
+|---------|-------------|--------|
+| 🧠 **AGENTS.md** | Team constitution file — project context, tech stack, conventions, red lines. Read by AI on every session. | Eliminates repetitive context-setting |
+| 📝 **MEMORY.md** | Long-term AI memory — key decisions, lessons learned, architecture rationale. Curated, not raw logs. | AI "remembers" across sessions |
+| 🔌 **Skills** | Modular, pluggable AI workflows with rules, checklists, and examples. Trigger on-demand. | Standardize code review, API design, architecture review |
+| 📋 **memory/** | Daily collaboration logs — raw records of what happened. AI helps maintain them. | Process visibility and traceability |
+| 🛠️ **TOOLS.md** | Environment-specific configuration — per-project, per-team notes. Not shared between contexts. | Clean separation of global vs. local config |
+| 🔄 **Git-Native** | All AI assets live in Git. PRs for rule changes. Diff for memory updates. | Version control for AI behavior |
+| 🔓 **Tool-Agnostic** | Works with Cursor, Copilot, Claude Code, Continue.dev, and any AI tool that reads files. | No vendor lock-in |
+| 📦 **init.sh** | Interactive setup wizard — configure team info, pick initial skills, scaffold workspace in 5 minutes. | Zero-friction adoption |
 
-workflow skill 处理跨项目的推进方法与质量门禁；真实项目的代码入口、接口边界和专项验证要求应继续沉淀到 `skills/<project>/<scene>/`。
+---
 
-## 目录结构
+## Quick Start
 
-- `AGENTS.md`：工作空间级 AI 协作约束模板
-- `CHANGELOG.md`：用户可读的模板版本记录
-- `workspace-assets-index.md`：非源码资产入口模板
-- `task-completion-checklist.md`：任务收尾闭环检查模板
-- `docs/`：通用文档入口与占位结构
-- `docs/development-specs/workflow-skills-design.md`：流程 skill 与项目场景 skill 的边界及编写规范
-- `docs/development-specs/template-adoption-cleanup.md`：模板复制后的历史记录清理与去污染指南
-- `docs/development-specs/workspace-versioning.md`：版本号规则、版本记录格式与版本资产关系
-- `docs/development-specs/workspace-upgrade-model.md`：工作空间版本维护与升级模型
-- `docs/development-specs/workspace-upgrade-prompts.md`：可复制的 AI 升级交互提示词
-- `skills/_workflow/`：工作空间级通用流程 skill
-- `skills/_templates/`：项目场景 skill 模板
-- `workspace-config/`：机器可读工作空间配置模板
-- `workspace-config/workspace-version.yaml`：模板版本、已应用能力与升级策略元信息
-- `references/`：可补充的外围事实模板
-- `scripts/`：初始化与自检脚本
-- `scripts/adopt_workspace.py`：AI 对话式复制模板、清理历史、写入源码映射并运行校验的辅助脚本
-- `task-plans/`：已确认方案与实施计划归档目录
-- `change-history/`：已完成任务历史归档目录
+### Prerequisites
 
-## 采用方式
+- Git installed
+- Any AI coding tool (Cursor, Copilot, Claude Code, etc.)
+- 5 minutes
 
-### 新建工作空间
+### Setup
 
-适合新业务线或新工程从一开始即采用统一的 AI 协作资产与治理流程：
+```bash
+# 1. Clone the template
+git clone https://github.com/struggling-bird/open-teams.git
+cd open-teams
 
-1. 复制本目录为业务线工作空间。
-2. 按真实工程补齐源码映射、项目文档与场景 skill。
-3. 以工作空间流程 skill 约束后续研发任务推进。
+# 2. Initialize your workspace (interactive wizard)
+./init.sh
 
-### 存量工程渐进式转型
+# 3. Open with your AI tool of choice
+cursor .        # or: code ., claude .
+```
 
-适合已有传统工程在不搬迁原有仓库、不一次性重构研发方式的前提下逐步接入：
+**That's it.** Your AI now:
 
-1. 先通过 `workspace-config/code-sources.yaml` 维护现有代码仓库映射，或按需将源码纳入 `sources/`。
-2. 从高频协作项目或问题场景开始，补齐 `docs/projects/` 与 `skills/<project>/<scene>/` 的最小必要资产。
-3. 在实际任务中使用通用 workflow skills 执行方案确认、计划、验证和资料沉淀，让资产随真实工作逐步成长。
+- ✅ Knows your project structure and tech stack (from `AGENTS.md`)
+- ✅ Remembers past decisions (from `MEMORY.md`)
+- ✅ Follows shared review standards (from `skills/`)
+- ✅ Writes daily collaboration notes (in `memory/`)
 
-## 持续升级
+### Try your first Skill
 
-本模板支持提示词驱动的工作空间按需升级。业务工作空间可通过 `workspace-config/workspace-version.yaml` 记录当前模板基线和已应用能力，再使用 [工作空间升级提示词](./docs/development-specs/workspace-upgrade-prompts.md) 触发 AI 检查、规划和实施升级。
+```bash
+# Open your AI tool in the workspace directory, then prompt:
+"Review the latest commit using the code-review skill"
+```
 
-用户可通过 [CHANGELOG.md](./CHANGELOG.md) 了解每个模板版本新增了什么、升级影响和推荐升级提示词；版本规则见 [工作空间版本规则](./docs/development-specs/workspace-versioning.md)。
+The AI reads `skills/code-review/SKILL.md`, loads the checklist and rules, and delivers a structured review — every team member gets the same quality standard.
 
-升级必须遵循以下边界：
+---
 
-- 先输出升级方案，获得用户确认后再修改文件。
-- 先将升级计划写入 `task-plans/`，经用户确认实施计划后再按节点实施。
-- 保护业务线本地定制和真实源码映射，不用模板示例覆盖。
-- 每个节点完成后等待用户验收。
-- 升级完成后运行模板校验，并补充复盘与 `change-history/`。
+## Project Structure
 
-## 模板边界
+```
+open-teams/
+├── AGENTS.md                  # Team constitution — AI reads this first
+├── MEMORY.md                  # Long-term team memory — decisions & rationale
+├── TOOLS.md                   # Environment notes (camera names, SSH hosts, etc.)
+├── init.sh                    # Interactive workspace setup wizard
+├── README.md                  # You are here
+├── CHANGELOG.md               # Version history
+│
+├── skills/                    # 🔌 Modular AI capabilities
+│   ├── code-review/           # Code quality and security review
+│   │   ├── SKILL.md           #   Skill trigger + execution instructions
+│   │   ├── checklist.md       #   Review checklist
+│   │   ├── examples/          #   Good/bad examples
+│   │   └── rules/             #   Specific rules (security, performance, etc.)
+│   ├── api-design-review/     # API design review
+│   ├── architecture-review/   # Architecture decision review
+│   └── onboarding/            # New team member onboarding
+│
+├── docs/                      # 📚 Team documentation
+│   ├── architecture/          # Architecture decision records
+│   ├── api/                   # API documentation
+│   └── en/                    # English docs (getting-started, why, etc.)
+│
+├── memory/                    # 📝 Daily AI collaboration logs
+│   └── YYYY-MM-DD.md          # One file per day
+│
+├── workspace-config/          # ⚙️ Workspace configuration
+│   └── .cursorrules           # Cursor-specific config (extensible)
+│
+├── task-plans/                # 📋 Sprint & task planning templates
+│   └── TEMPLATE.md
+│
+├── templates/                 # 🏗️ Project bootstrap templates
+│
+└── change-history/            # 📖 Project-level change log
+    └── TEMPLATE.md
+```
 
-本仓库不包含以下内容：
+---
 
-- 当前业务线的真实源码
-- 当前业务线的项目级文档
-- 当前业务线的项目级 skill
-- 当前业务线的环境账号、测试地址或数据字典
+## Comparison
 
-如果使用 `sources/` 接入真实业务源码，默认只保留 `sources/README.md`，真实源码目录不提交到模板仓库。
+### open-teams vs. Raw AI Chat vs. Traditional Project Management
 
-## 验收标准
+| Dimension | Raw AI Chat | Shared Rules File | Notion/Confluence Docs | ✅ open-teams |
+|-----------|-------------|-------------------|------------------------|----------------|
+| **Context persistence** | ❌ Lost when chat ends | ⚠️ One flat file, no structure | ❌ AI can't read Notion | ✅ Multi-layer: AGENTS.md + MEMORY.md + daily logs |
+| **Team alignment** | ❌ Everyone teaches AI differently | ⚠️ Single-file contention | ⚠️ Docs exist, but AI ignores them | ✅ Git-managed shared standards |
+| **Knowledge capture** | ❌ Scattered in chat histories | ❌ No structured capture | ⚠️ "Result docs," not process | ✅ Daily logs + curated long-term memory |
+| **Skill reusability** | ❌ Every session starts fresh | ❌ Copy-paste between projects | ❌ Docs ≠ executable workflows | ✅ Modular Skills — install and reuse |
+| **Tool independence** | ❌ Tied to one chat tool | ⚠️ Usually tool-specific | ⚠️ Platform-dependent | ✅ Works with any file-reading AI |
+| **Version control** | ❌ No history | ⚠️ Basic Git tracking | ❌ Notion versioning is limited | ✅ Full Git: diff, PR review, blame |
+| **Onboarding speed** | ❌ Weeks of oral tradition | ⚠️ Read the rules file | ⚠️ Read the wiki | ✅ Clone → AI knows the team |
+| **Review standardization** | ❌ Each reviewer has own bar | ⚠️ One checklist fits all | ⚠️ Checklist exists, manual usage | ✅ Skill-embedded review rules |
 
-- 可独立作为新工作空间的起点目录
-- 不依赖当前业务线专有目录与专有名词
-- 目录职责清晰，可按需扩展
-- 通用 workflow skills 可从入口定位，且具备触发、产物、验证与退出条件
-- 用户可通过 `CHANGELOG.md` 感知每个模板版本的能力变化和升级影响
-- `scripts/validate_template_layout.py` 能识别缺失的流程资产、升级资产、入口登记或模板卫生问题
+### open-teams vs. Competitors (Detailed)
 
-欢迎添加好友后进群交流（请注明是通过openTeams添加好友）：<img width="814" height="1041" alt="9e6289360f3a55b84ed5381dcce254a5" src="https://github.com/user-attachments/assets/26fa2683-59aa-4179-a1ba-13c7840ff5fb" />
+| Tool | Best For | Limitation |
+|------|----------|------------|
+| **Copilot Rules** | Individual AI coding efficiency | Single-file, no team sharing, tool-locked |
+| **Notion AI** | Non-technical knowledge management | AI doesn't natively read Notion in your IDE |
+| **Cursor Rules** | Per-project cursor configuration | Not modular, not shared across tools |
+| **open-teams** | **Dev team AI collaboration at scale** | Requires Git basics (not for non-tech teams) |
+
+---
+
+## Roadmap
+
+| Version | Timeline | Highlights |
+|---------|----------|------------|
+| **v0.1** | Now | Core template: AGENTS.md, MEMORY.md, Skills structure, init.sh |
+| **v0.2** | +2 weeks | Additional Skills (testing, docs generation, system design review), multi-language support |
+| **v0.3** | +1 month | Skills marketplace — share and install community skills, deeper tool integrations |
+| **v1.0** | +3 months | Enterprise features: team management, analytics, CI/CD integration, AI-native project management |
+
+> 💡 Have a feature idea? [Open a Discussion](https://github.com/struggling-bird/open-teams/discussions/categories/ideas).
+
+---
+
+## Contributing
+
+open-teams is community-first. Whether you're fixing a typo or proposing a new Skill, you're welcome.
+
+### Ways to Contribute
+
+- **⭐ Star the repo** — it helps more people find us
+- **🐛 Report bugs** — [Open an Issue](https://github.com/struggling-bird/open-teams/issues/new?template=bug_report.md)
+- **💡 Suggest features** — [Start a Discussion](https://github.com/struggling-bird/open-teams/discussions)
+- **🔧 Submit PRs** — See [CONTRIBUTING.md](CONTRIBUTING.md)
+- **📖 Improve docs** — English + Chinese translations welcome
+- **🧩 Share Skills** — Built a useful Skill? Share it with the community
+- **🌍 Translate** — Help localize docs for global teams
+
+### Good First Issues
+
+Check out issues labeled [`good first issue`](https://github.com/struggling-bird/open-teams/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) — we'll help you through your first PR.
+
+### Community
+
+- 💬 [GitHub Discussions](https://github.com/struggling-bird/open-teams/discussions) — Questions, ideas, RFCs
+- 📢 Follow for updates (links coming soon)
+
+---
+
+## Star History
+
+<!--
+  Placeholder for star-history.com chart.
+  Add after repo gains traction:
+  <a href="https://star-history.com/#struggling-bird/open-teams&Date">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=struggling-bird/open-teams&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=struggling-bird/open-teams&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=struggling-bird/open-teams&type=Date" />
+    </picture>
+  </a>
+-->
+
+---
+
+## License
+
+MIT © [struggling-bird](https://github.com/struggling-bird)
+
+---
+
+<p align="center">
+  <sub>
+    Built with ❤️ by developers who believe AI should augment teams, not replace them.<br>
+    <a href="https://github.com/struggling-bird/open-teams">⭐ Star us on GitHub</a>
+  </sub>
+</p>
