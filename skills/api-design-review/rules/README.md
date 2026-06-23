@@ -2,40 +2,26 @@
 
 ## REST-001: Plural Resource Names
 **Severity:** High
-Always use plural nouns for collection endpoints.
+Always use plural nouns for collection endpoints (`/users`, not `/getUsers`).
 
-## REST-002: No Verbs in Paths
+## REST-002: HTTP Methods by Semantic
 **Severity:** High
-Use HTTP methods (GET, POST, PUT, DELETE) to express actions.
+GET=read, POST=create, PUT=replace, PATCH=update, DELETE=remove. No verbs in URL paths.
 
-## REST-003: Consistent Status Codes
+## REST-003: Pagination Required
 **Severity:** High
-Use standard HTTP status codes consistently.
+All list endpoints must support pagination. Cursor-based preferred for large datasets.
 
-## REST-004: Pagination
-**Severity:** High
-All list endpoints must support pagination (cursor-based preferred).
-
-## REST-005: Error Format
-**Severity:** Medium
-Use a consistent error envelope with code, message, and optional field.
-
-## SEC-API-001: No IDs in Auth Tokens
+## SEC-API-001: Authenticate Sensitive Endpoints
 **Severity:** Critical
-Never send authentication tokens in URL query parameters or paths.
+Public endpoints exposing user data or performing mutations must require authentication.
 
-## SEC-API-002: Input Validation
-**Severity:** Critical
-Validate all input: type, length, format, range. Never trust client input.
-
-## SEC-API-003: Rate Limiting
-**Severity:** High
-All public endpoints should have rate limiting configured.
-
-## REL-001: Idempotency
+## REL-API-001: Idempotent Mutations
 **Severity:** Medium
-PUT and DELETE operations should be idempotent.
+PUT and DELETE operations should be idempotent — repeated calls produce the same result.
 
-## REL-002: Timeouts
-**Severity:** Medium
-All API calls should have configured timeouts (default: 30s).
+## Add Your Rules Below
+Customize with your team's API standards:
+- Error envelope format (`{ errors: [{ code, message, field }] }`)
+- Versioning strategy (URL path vs. header)
+- Rate limiting thresholds
