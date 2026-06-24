@@ -496,7 +496,7 @@ cd /tmp/open-teams
 - [GitHub Discussions](https://github.com/struggling-bird/open-teams/discussions) — Questions and community
 - [Contributing Guide](../../CONTRIBUTING.md) — How to contribute
 - [Repository README](../../README.md) — Full project overview
-- [Documentation Index](README.md) — All English docs
+- [Documentation Index](../../README.md) — All English docs
 
 ---
 
