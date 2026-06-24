@@ -1,10 +1,9 @@
-# open-teams — AI 协作工作空间
+# open-teams Agent Team
 
-> open-teams 的团队工作空间。这个 AGENTS.md 是给 open-teams 项目的协作者看的。
-> 
-> 用户工作空间的 AGENTS.md 由 `init.sh` 自动生成，形态完全不同：它是 AI 引导者的「脚本」，引导 AI 通过对话帮用户适配工作空间。详见 `scripts/init/templates.py`。
+> 这是 open-teams 项目自身的 AGENTS.md，是我们吃自己狗粮的产物。
+> 用户通过 `init.sh` 获取的 AGENTS.md 模板（定义在 `scripts/init/templates.py`）以此为基础，但面向通用场景做了泛化。
 
-## 项目信息
+## Team Architecture
 
 ```
                     ┌─────────────────────┐
