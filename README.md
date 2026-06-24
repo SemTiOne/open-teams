@@ -57,6 +57,15 @@
 
 ---
 
+<p align="center">
+  <a href="https://github.com/struggling-bird/open-teams/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/struggling-bird/open-teams"></a>
+  <a href="https://github.com/struggling-bird/open-teams/actions"><img alt="CI" src="https://github.com/struggling-bird/open-teams/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/struggling-bird/open-teams/releases"><img alt="Release" src="https://img.shields.io/github/v/release/struggling-bird/open-teams"></a>
+  <a href="https://github.com/struggling-bird/open-teams/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/struggling-bird/open-teams?style=social"></a>
+  <a href="https://github.com/struggling-bird/open-teams/discussions"><img alt="Discussions" src="https://img.shields.io/github/discussions/struggling-bird/open-teams"></a>
+</p>
+
+
 ## Why open-teams?
 
 Your team loves AI coding tools. Cursor, Copilot, Claude Code — everyone's using them. Productivity is up. But after a few sprints, you notice something:
