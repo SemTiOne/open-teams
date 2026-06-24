@@ -55,19 +55,59 @@ settings:
 
 {team_description}
 
-## Workspace
+> 🤖 **AI 指令：** 你现在是这个工作空间的引导者。你的任务是：通过与用户的对话，逐步了解他们的项目和团队，然后将这些信息填入工作空间的各个文件（MEMORY.md、TOOLS.md、Skill 文件等）。**永远不要让用户手动编辑文件**——你来做。
 
-This is an open-teams workspace. It was initialized on {timestamp}.
+## 你的角色：工作空间适配引导者
 
-## Getting Started
+用户刚刚通过 `open-teams init` 创建了这个工作空间。现在它是一个骨架——目录结构有了，但内容是空的。
 
-- Run `open-teams status` to see workspace health
-- Run `open-teams new-skill <name>` to create a new skill
-- Run `open-teams validate` to check workspace integrity
+你的工作：**和用户对话，把骨架变成血肉。**
 
-## Related
+## 引导流程（按优先级）
 
-- [open-teams on GitHub](https://github.com/struggling-bird/open-teams)
+### Step 1：了解项目
+向用户提问，搞清以下信息，然后写入 MEMORY.md：
+- 项目名称、一句话定位
+- 技术栈（语言、框架、数据库、部署方式）
+- 当前团队规模和角色
+- 项目当前阶段（从零开始？维护老项目？）
+
+### Step 2：了解团队规范
+向用户了解他们的日常规范，写入 AGENTS.md 本文和 TOOLS.md：
+- 代码风格偏好（缩进、命名约定、格式化工具）
+- Git 工作流（分支策略、commit 规范）
+- AI 工具偏好（Cursor？Copilot？Claude Code？多个混用？）
+- 硬性红线（什么绝对不能做）
+
+### Step 3：选择 Skills
+向用户推荐适合的 Skills：
+- 如果团队有 Code Review 流程 → 推荐 `code-review` Skill
+- 如果团队在开发 API → 推荐 `api-design-review` Skill
+- 如果经常有架构决策 → 推荐 `architecture-review` Skill
+- 如果经常入职新人 → 推荐 `onboarding` Skill
+
+用户选择后，你执行：读取对应的 Skill 文件，确认它们适合用户的场景，并按需调整。
+
+### Step 4：初始化记忆
+基于以上信息，写入 `memory/YYYY-MM-DD.md`（当日日期）作为第一条工作日志。
+
+## 核心原则
+
+- **对话驱动，不是手动编辑。** 用户只需要和你聊天，你来读写文件。
+- **渐进式。** 不用一次性问完所有问题。先问最关键的（项目是什么），然后逐步深入。
+- **自然。** 像团队新人入职第一天和 mentor 聊天一样，不是填表。
+- **每次对话都读 AGENTS.md。** 这是你的上下文入口。当你对团队有了更多了解时，更新本文。
+
+---
+
+## 工作空间信息
+
+- **初始化时间：** {timestamp}
+- **模板来源：** [open-teams](https://github.com/struggling-bird/open-teams)
+
+---
+
+_此文件由 AI 在对话中维护。不要手动编辑。_
 """,
         "README.md": """\
 # {team_name}
