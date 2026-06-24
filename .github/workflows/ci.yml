@@ -11,12 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Validate template layout
         run: python3 scripts/validate_template_layout.py
+
       - name: Check Python syntax
-        run: python3 -m py_compile scripts/*.py scripts/init/*.py init-command.py
-      - name: Verify init entrypoints
+        run: python3 -m py_compile scripts/validate_template_layout.py scripts/workspace-health-check.py scripts/init_project_skills.py
+
+      - name: Lint with ruff
         run: |
-          chmod +x init.sh
-          ./init.sh --help
-          python3 init-command.py --help
+          pip install ruff
+          ruff check scripts/ --select E,F,W --ignore E501
+
+      - name: Check Markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'no'
+          config-file: '.github/markdown-link-check.json'
+
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run workspace health check
+        run: python3 scripts/workspace-health-check.py --template-repo
