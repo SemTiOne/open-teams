@@ -1,0 +1,15 @@
+{
+  "ignorePatterns": [
+    { "pattern": "^https://img.shields.io" },
+    { "pattern": "^https://github.com/struggling-bird/open-teams/stargazers" },
+    { "pattern": "^https://star-history.com" },
+    { "pattern": "^https://api.github.com" }
+  ],
+  "replacementPatterns": [],
+  "httpHeaders": [],
+  "timeout": "20s",
+  "retryOn429": true,
+  "retryCount": 2,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [200, 206, 301, 302, 304, 307, 308]
+}
