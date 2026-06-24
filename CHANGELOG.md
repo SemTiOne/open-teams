@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Non-code contributions guide in `CONTRIBUTING.md` covering documentation, translations, design, 
+  and community support ([#12](https://github.com/struggling-bird/open-teams/issues/12))
+
 ## [v0.4.2] — 2026-06-23
 
 ### Added
