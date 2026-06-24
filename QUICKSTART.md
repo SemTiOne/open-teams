@@ -6,12 +6,12 @@
    ```bash
    git clone https://github.com/struggling-bird/open-teams.git
    cd open-teams
-   python3 init-command.py
+   ./init.sh
    ```
 
 2. **Explore Skills** — browse `skills/` directory for pre-built agent workflows
 
-3. **Customize** — edit `AGENTS.md` with your team\'s standards
+3. **Customize** — edit `AGENTS.md` with your team's standards
 
 ---
 
@@ -21,7 +21,7 @@
    ```bash
    git clone https://github.com/struggling-bird/open-teams.git
    cd open-teams
-   python3 init-command.py
+   ./init.sh
    ```
 
 2. **探索 Skills** — 浏览 `skills/` 目录查看预制的 Agent 工作流

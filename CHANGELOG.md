@@ -7,32 +7,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.2] — 2026-06-23
+
 ### Added
-- Dual-language README (EN + ZH-CN)
-- 4 core Skills: code-review, api-design-review, architecture-review, onboarding
-- Community health files: CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, FUNDING
-- Issue templates and PR template
-- GitHub Discussions (6 categories with seeds)
-- 10 repository Topics for discoverability
-- Good First Issues (5 issues for new contributors)
-- Logo and brand assets
-- Dependabot configuration
-- CHANGELOG.md (this file)
+- `init.sh` and `init-command.py` as unified workspace initialization entrypoints
+- `.github/workflows/ci.yml` for automated template layout and Python syntax validation
+- Core skill registry in `skills/README.md` with bilingual descriptions
+
+### Fixed
+- `skills/README.md` workflow skill links required by `validate_template_layout.py`
+- `workspace-health-check.py` usage documentation (correct script filename)
+- `QUICKSTART.md` initialization instructions aligned with `init.sh`
+- Removed unused Dependabot `pip` ecosystem (project uses stdlib-only Python)
+- `.gitignore` extended to exclude Python `__pycache__/` artifacts
+
+### Changed
+- `skills/README.md` bilingual structure for workflow and core skills
+
+## [v0.4.1] — 2026-06-01
+
+### Added
+- Node-level version maintenance gate: commit and push workspace changes before proceeding to the next node
+
+## [v0.4.0] — 2026-06-01
+
+### Added
+- AI-guided workspace adoption via `QUICKSTART.md` prompts and `scripts/adopt_workspace.py`
+- Template history cleanup guide and `scripts/prepare_clean_workspace.py`
+
+## [v0.3.0] — 2026-05-29
+
+### Added
+- Implementation plan confirmation gate before coding
+- Template adoption cleanup for `task-plans/` and `change-history/`
+- `sources/` gitignore protection for business source code
 
 ## [v0.2.0] — 2026-06-23
 
 ### Added
 - Complete English README with architecture diagram and comparison tables
+- Dual-language README (EN + ZH-CN)
+- 4 core Skills: code-review, api-design-review, architecture-review, onboarding
+- Community health files: CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, FUNDING
+- Issue templates and PR template
+- Dependabot configuration for GitHub Actions
+- `init/` Python package (modular workspace initialization)
+- `workspace-health-check.py` script
+- Logo and brand assets
 - AGENTS.md update with team collaboration rules
-- init/ Python package (modular workspace initialization)
-- workspace-health-check.py script
-- GitHub Actions CI template
-- Installation script (installation-script.sh)
+- Documentation restructured under `docs/en/`
 
 ### Changed
-- init-command.py refactored to init/ package (ui.py, templates.py, workspace.py, cli.py)
-- Documentation restructured under docs/en/
-- QUICKSTART.md updated with bilingual version
+- `QUICKSTART.md` updated with bilingual version
 
 ## [v0.1.0] — 2026-05-15
 
@@ -42,6 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation framework: docs/, README.md
 - Task planning: task-plans/, task-plans/TEMPLATE.md
 - Change tracking: change-history/, change-history/TEMPLATE.md
-- Workspace config: workspace-config/, .cursorrules
+- Workspace config: workspace-config/
+- Workflow skills design and validation (`scripts/validate_template_layout.py`)
 - MIT License
-- Initial README in Chinese

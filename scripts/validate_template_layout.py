@@ -9,6 +9,9 @@ REQUIRED_PATHS = [
     "CHANGELOG.md",
     "README.md",
     "AGENTS.md",
+    "init.sh",
+    "init-command.py",
+    ".github/workflows/ci.yml",
     "workspace-assets-index.md",
     "task-completion-checklist.md",
     "docs/README.md",
@@ -31,6 +34,13 @@ REQUIRED_PATHS = [
     "task-plans/TEMPLATE.md",
     "change-history/TEMPLATE.md",
     "sources/README.md",
+]
+
+REQUIRED_CORE_SKILLS = [
+    "code-review",
+    "api-design-review",
+    "architecture-review",
+    "onboarding",
 ]
 
 REQUIRED_WORKFLOWS = [
@@ -58,6 +68,8 @@ def main() -> int:
     root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
     required_paths = REQUIRED_PATHS + [
         f"skills/_workflow/{workflow}/SKILL.md" for workflow in REQUIRED_WORKFLOWS
+    ] + [
+        f"skills/{skill}/SKILL.md" for skill in REQUIRED_CORE_SKILLS
     ]
     missing = [item for item in required_paths if not (root / item).exists()]
     if missing:
@@ -94,6 +106,17 @@ def main() -> int:
             print(f"- {workflow}")
         return 1
 
+    unregistered_core = [
+        skill
+        for skill in REQUIRED_CORE_SKILLS
+        if f"./{skill}/SKILL.md" not in skills_index
+    ]
+    if unregistered_core:
+        print("core skills missing from skills/README.md:")
+        for skill in unregistered_core:
+            print(f"- {skill}")
+        return 1
+
     workspace_index = (root / "workspace-assets-index.md").read_text(encoding="utf-8")
     if "docs/development-specs/template-adoption-cleanup.md" not in workspace_index:
         print("template cleanup guide missing from workspace-assets-index.md")
@@ -103,6 +126,9 @@ def main() -> int:
         return 1
     if "scripts/adopt_workspace.py" not in workspace_index:
         print("adopt workspace script missing from workspace-assets-index.md")
+        return 1
+    if "init.sh" not in workspace_index:
+        print("init.sh missing from workspace-assets-index.md")
         return 1
 
     gitignore = (root / ".gitignore").read_text(encoding="utf-8").splitlines()

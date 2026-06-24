@@ -1,7 +1,7 @@
 template:
   id: open-teams
-  version: 0.4.1
-  revision: node-level-version-maintenance-gate
+  version: 0.4.2
+  revision: template-health-and-init-entrypoints
   source: local-template
   changelog_path: CHANGELOG.md
   versioning_doc_path: docs/development-specs/workspace-versioning.md
@@ -9,7 +9,7 @@ template:
 workspace:
   adoption_mode: template
   source_strategy: undecided
-  last_upgrade_at: 2026-06-01
+  last_upgrade_at: 2026-06-23
   local_customization_notes:
     - 通用模板仓库，不包含业务线专有事实。
 
@@ -44,6 +44,9 @@ applied_capabilities:
   - id: node-level-version-maintenance-gate
     status: applied
     summary: 节点验收后必须先提交推送工作空间和适用 sources 仓库改动，再进入下一节点
+  - id: template-health-and-init-entrypoints
+    status: applied
+    summary: 统一 init 入口、启用 CI 校验、修复 skill 登记与模板自检闭环
 
 upgrade_policy:
   mode: ai-prompt-driven

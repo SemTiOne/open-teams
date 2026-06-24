@@ -1,24 +1,36 @@
-# Skills
+# Skills / 技能库
 
-Skills are modular, AI-executable workflows that standardize how your team tackles common tasks. Each Skill is a self-contained directory that your AI tools can load on demand.
+**English** | Skills are modular, AI-executable workflows that standardize how your team tackles common tasks. Each Skill is a self-contained directory that your AI tools can load on demand.
 
-## Skill Categories
+**中文** | Skills 是可模块化加载的 AI 工作流，用于统一团队常见任务的执行方式。每个 Skill 是独立目录，供 AI 工具按需读取。
+
+## Skill Categories / 技能分类
 
 | Type | Directory | Purpose |
 |------|-----------|---------|
 | Workflow Skills | `skills/_workflow/<name>/SKILL.md` | Cross-project process gates: solution confirmation, implementation planning, debugging, verification |
+| Core Skills | `skills/<name>/SKILL.md` | Reusable team workflows: code review, API design, architecture review, onboarding |
 | Project Skills | `skills/<project>/<scene>/SKILL.md` | Project-specific workflows: new features, bug fixes, refactors, performance tuning |
 
-## Available Workflow Skills
+## Available Workflow Skills / 工作空间流程 Skill
 
-| Skill | Description |
-|-------|-------------|
-| `solution-confirmation` | Confirm scope, approach, and authorization before any implementation |
-| `writing-implementation-plan` | Break confirmed solutions into verifiable, step-by-step plans |
-| `systematic-debugging` | Reproduce and diagnose issues with evidence, not guesswork |
-| `verification-before-completion` | Validate results before claiming completion |
-| `branch-and-worktree-workflow` | Manage branches, worktrees, and version control discipline |
-| `workspace-upgrade` | Plan and execute workspace template upgrades safely |
+| Skill | Path | Description |
+|-------|------|-------------|
+| `solution-confirmation` | [./_workflow/solution-confirmation/SKILL.md](./_workflow/solution-confirmation/SKILL.md) | Confirm scope, approach, and authorization before any implementation |
+| `writing-implementation-plan` | [./_workflow/writing-implementation-plan/SKILL.md](./_workflow/writing-implementation-plan/SKILL.md) | Break confirmed solutions into verifiable, step-by-step plans |
+| `systematic-debugging` | [./_workflow/systematic-debugging/SKILL.md](./_workflow/systematic-debugging/SKILL.md) | Reproduce and diagnose issues with evidence, not guesswork |
+| `verification-before-completion` | [./_workflow/verification-before-completion/SKILL.md](./_workflow/verification-before-completion/SKILL.md) | Validate results before claiming completion |
+| `branch-and-worktree-workflow` | [./_workflow/branch-and-worktree-workflow/SKILL.md](./_workflow/branch-and-worktree-workflow/SKILL.md) | Manage branches, worktrees, and version control discipline |
+| `workspace-upgrade` | [./_workflow/workspace-upgrade/SKILL.md](./_workflow/workspace-upgrade/SKILL.md) | Plan and execute workspace template upgrades safely |
+
+## Available Core Skills / 内置核心 Skill
+
+| Skill | Path | Description |
+|-------|------|-------------|
+| `code-review` | [./code-review/SKILL.md](./code-review/SKILL.md) | Standardized code review with checklist, rules, and examples |
+| `api-design-review` | [./api-design-review/SKILL.md](./api-design-review/SKILL.md) | API design consistency, versioning, and contract review |
+| `architecture-review` | [./architecture-review/SKILL.md](./architecture-review/SKILL.md) | Architecture decision and system design review |
+| `onboarding` | [./onboarding/SKILL.md](./onboarding/SKILL.md) | New team member onboarding workflow |
 
 ## Creating a New Skill
 

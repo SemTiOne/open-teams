@@ -14,11 +14,11 @@ Output formats:
   - JSON report (--json flag)
 
 Usage:
-    python3 scripts/health_check.py                  # Scan current directory
-    python3 scripts/health_check.py /path/to/workspace
-    python3 scripts/health_check.py --json           # JSON output
-    python3 scripts/health_check.py --json > report.json
-    python3 scripts/health_check.py --strict         # Exit non-zero on warnings
+    python3 scripts/workspace-health-check.py                  # Scan current directory
+    python3 scripts/workspace-health-check.py /path/to/workspace
+    python3 scripts/workspace-health-check.py --json           # JSON output
+    python3 scripts/workspace-health-check.py --json > report.json
+    python3 scripts/workspace-health-check.py --strict         # Exit non-zero on warnings
 
 Requirements:
     Python 3.10+
@@ -224,6 +224,152 @@ def print_report(report: HealthReport) -> None:
 # ---------------------------------------------------------------------------
 # Health check functions
 # ---------------------------------------------------------------------------
+
+
+def _read_adoption_mode(workspace: Path) -> str | None:
+    """Read adoption_mode from workspace-version.yaml if present."""
+    version_file = workspace / "workspace-config" / "workspace-version.yaml"
+    if not version_file.is_file():
+        return None
+    try:
+        content = version_file.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None
+
+    in_workspace = False
+    for line in content.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if stripped == "workspace:":
+            in_workspace = True
+            continue
+        if in_workspace and stripped.endswith(":") and not stripped.startswith(" "):
+            break
+        if in_workspace and stripped.startswith("adoption_mode:"):
+            return stripped.partition(":")[2].strip().strip('"').strip("'")
+    return None
+
+
+def check_template_repository(workspace: Path, report: HealthReport) -> None:
+    """Run health checks appropriate for the open-teams template repository itself."""
+    report.add(Finding(
+        category="Workspace Mode",
+        severity=Severity.INFO,
+        message="Template repository detected (adoption_mode: template)",
+        path="workspace-config/workspace-version.yaml",
+        recommendation="Use scripts/validate_template_layout.py for strict template checks.",
+    ))
+
+    template_dirs = [
+        "skills",
+        "skills/_workflow",
+        "docs",
+        "scripts",
+        "workspace-config",
+        ".github",
+        ".github/workflows",
+        ".github/ISSUE_TEMPLATE",
+    ]
+    for dir_path in template_dirs:
+        full = workspace / dir_path
+        if full.is_dir():
+            report.add(Finding(
+                category="Directory Structure",
+                severity=Severity.OK,
+                message=f"Template directory present: {dir_path}/",
+                path=dir_path,
+            ))
+        else:
+            report.add(Finding(
+                category="Directory Structure",
+                severity=Severity.ERROR,
+                message=f"Missing template directory: {dir_path}/",
+                path=dir_path,
+            ))
+
+    template_files = [
+        ("workspace-config/workspace-version.yaml", "Template version metadata"),
+        ("init.sh", "Workspace initialization entrypoint"),
+        ("init-command.py", "Backward-compatible init entrypoint"),
+        (".github/workflows/ci.yml", "CI workflow"),
+        ("scripts/validate_template_layout.py", "Template layout validator"),
+    ]
+    for file_path, description in template_files:
+        full = workspace / file_path
+        if full.is_file():
+            report.add(Finding(
+                category="Required Files",
+                severity=Severity.OK,
+                message=f"Template file present: {file_path} ({description})",
+                path=file_path,
+            ))
+        else:
+            report.add(Finding(
+                category="Required Files",
+                severity=Severity.ERROR,
+                message=f"Missing template file: {file_path} ({description})",
+                path=file_path,
+            ))
+
+    version_file = workspace / "workspace-config" / "workspace-version.yaml"
+    if version_file.is_file():
+        content = version_file.read_text(encoding="utf-8")
+        template_version = _extract_yaml_value(content, "version")
+        template_name = _extract_yaml_value(content, "id", section="template")
+        if template_version:
+            report.add(Finding(
+                category="Template Version",
+                severity=Severity.INFO,
+                message=f"Template: {template_name or 'open-teams'} v{template_version}",
+                path="workspace-config/workspace-version.yaml",
+            ))
+        else:
+            report.add(Finding(
+                category="Template Version",
+                severity=Severity.WARNING,
+                message="Could not determine template version from workspace-version.yaml",
+                path="workspace-config/workspace-version.yaml",
+            ))
+
+    skills_dir = workspace / "skills"
+    if skills_dir.is_dir():
+        skill_dirs = [
+            d for d in skills_dir.iterdir()
+            if d.is_dir() and not d.name.startswith(("_", "."))
+        ]
+        workflow_dirs = list((skills_dir / "_workflow").iterdir()) if (skills_dir / "_workflow").is_dir() else []
+        report.add(Finding(
+            category="Skills",
+            severity=Severity.OK,
+            message=f"Found {len(skill_dirs)} core skill(s) and {len(workflow_dirs)} workflow skill(s)",
+            path="skills/",
+        ))
+
+    validator = workspace / "scripts" / "validate_template_layout.py"
+    if validator.is_file():
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(validator), str(workspace)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode == 0:
+            report.add(Finding(
+                category="Template Validation",
+                severity=Severity.OK,
+                message="validate_template_layout.py passed",
+                path="scripts/validate_template_layout.py",
+            ))
+        else:
+            report.add(Finding(
+                category="Template Validation",
+                severity=Severity.ERROR,
+                message="validate_template_layout.py failed",
+                path="scripts/validate_template_layout.py",
+                recommendation=(result.stdout or result.stderr or "Run validator for details.").strip(),
+            ))
 
 
 def check_required_directories(workspace: Path, report: HealthReport) -> None:
@@ -731,6 +877,15 @@ def run_health_check(workspace: Path) -> HealthReport:
         timestamp=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     )
 
+    adoption_mode = _read_adoption_mode(workspace)
+    if adoption_mode == "template":
+        check_template_repository(workspace, report)
+        check_change_history(workspace, report)
+        check_docs_coverage(workspace, report)
+        check_git_health(workspace, report)
+        report.finalize()
+        return report
+
     check_required_directories(workspace, report)
     check_required_files(workspace, report)
     check_template_version(workspace, report)
@@ -750,15 +905,15 @@ def build_parser() -> argparse.ArgumentParser:
         Configured ArgumentParser.
     """
     parser = argparse.ArgumentParser(
-        prog="health_check",
+        prog="workspace-health-check",
         description="Scan an open-teams workspace and report health status.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""\
 Examples:
-  python3 scripts/health_check.py                 # Scan current directory
-  python3 scripts/health_check.py /path/to/team   # Scan specific workspace
-  python3 scripts/health_check.py --json          # JSON output
-  python3 scripts/health_check.py --strict        # Exit non-zero on warnings
+  python3 scripts/workspace-health-check.py                 # Scan current directory
+  python3 scripts/workspace-health-check.py /path/to/team   # Scan specific workspace
+  python3 scripts/workspace-health-check.py --json          # JSON output
+  python3 scripts/workspace-health-check.py --strict        # Exit non-zero on warnings
         """,
     )
 
