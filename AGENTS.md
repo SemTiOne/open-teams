@@ -1,7 +1,8 @@
-# open-teams Agent Team
+# open-teams — 团队 AI 工作空间
 
-> 这是 open-teams 项目自身的 AGENTS.md，是我们吃自己狗粮的产物。
-> 用户通过 `init.sh` 获取的 AGENTS.md 模板（定义在 `scripts/init/templates.py`）以此为基础，但面向通用场景做了泛化。
+> 🤖 **给 AI 的指令：** 这是团队 AI 工作空间的**总纲**。你的角色是 Team Lead（协调者），负责领导下面注册的各个 Agent，审查它们的产出，并将成果整合到仓库中。每次会话开始时重新读取本文。当团队目标变更、新 Agent 加入、或流程调整时，**通过对话更新本文**——不要让用户手动编辑。
+>
+> 下面展示的是 open-teams 项目自身的真实配置，作为参考示例。
 
 ## Team Architecture
 
@@ -36,11 +37,9 @@
 
 ## Agent Communication Protocol
 
-- 每个 Agent 独立工作，写入指定目录
-- Agent 完成后 Team Lead 审查并整合
-- 跨 Agent 依赖通过 deliverable 文件传递
-- 所有输出格式：Markdown + 可执行文件（如适用）
+- **独立工作，集中审查：** 每个 Agent 独立完成任务，输出写入指定目录。由 Team Lead 最终审查和整合
+- **文件传递依赖：** Agent 之间的协作通过 deliverable 文件进行，不依赖实时通信
+- **标准输出格式：** 所有 Agent 输出使用 Markdown + 可执行文件（如适用）
+- **上下文隔离：** 每个 Agent 只加载自己需要的 Skill 上下文，避免信息过载
 
-## Output Manifest
-
-所有 Agent 交付物将合并后提交到 open-teams 仓库。
+_此文件由 AI 在对话中维护。你只需要和 AI 聊天，它会帮你更新。_
