@@ -8,6 +8,8 @@ Think of it as your team's curated long-term memory — not a daily log, but the
 
 ## How to Use
 
+This file is maintained by AI through conversation — not manually edited. Your AI reads this at the start of every session.
+
 - Write down significant architectural decisions and the reasoning behind them
 - Record lessons learned from successes and failures
 - Document project identity and team conventions
@@ -15,26 +17,23 @@ Think of it as your team's curated long-term memory — not a daily log, but the
 - Keep it concise — this is for AI context, not exhaustive documentation
 - Review and prune periodically to keep context fresh
 
-## Template
+## Template (AI fills this as it learns about your team)
 
 ### Project Identity
-- **Project:** [name]
-- **Goal:** [mission statement]
-- **License:** [license]
-- **Created:** [YYYY-MM-DD]
+- **Project:** (AI will ask and fill this in)
+- **Goal:** (AI will ask and fill this in)
+- **License:** (AI will ask and fill this in)
+- **Created:** (AI will ask and fill this in)
 
 ### Key Decisions
-- **[YYYY-MM-DD]** — [Decision]: [Brief rationale and trade-offs considered]
-- ...
+_(AI records each decision here with date, rationale, and trade-offs)_
 
 ### Lessons Learned
-- **[YYYY-MM-DD]** — [Lesson]: [What happened, what we learned, what we'll do differently]
-- ...
+_(AI records each lesson here with date, what happened, and what we learned)_
 
 ### Architecture Notes
-- [Pattern or convention]: [Why we use it, when to deviate]
-- ...
+_(AI records patterns and conventions with rationale)_
 
 ### Team
-- **Maintainers:** [names or handles]
-- **Repository:** [URL]
+- **Maintainers:** (AI will ask and fill this in)
+- **Repository:** (AI will ask and fill this in)

@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Template adoption cleanup for `task-plans/` and `change-history/`
 - `sources/` gitignore protection for business source code
 
-## [v0.2.0] — 2026-06-23
+## [v0.2.0] — 2026-05-25
 
 ### Added
 - Complete English README with architecture diagram and comparison tables

@@ -66,9 +66,11 @@ cp -r /tmp/open-teams/memory ./memory
 cp /tmp/open-teams/docs ./docs
 cp /tmp/open-teams/templates ./templates
 
-# 3. Customize
-# Edit AGENTS.md to describe YOUR project
-# Pick relevant Skills from skills/ (delete what you don't need)
+# 3. Let AI handle the rest
+# Open your AI coding tool in the project directory.
+# AI reads AGENTS.md, understands the governance model, and adapts
+# the workspace to your project through conversation.
+# You don't edit files manually — AI does it for you.
 
 # 4. Commit
 git add AGENTS.md MEMORY.md TOOLS.md skills/ memory/ docs/ templates/
@@ -85,23 +87,28 @@ cp /tmp/open-teams/AGENTS.md ./AGENTS.md
 cp /tmp/open-teams/MEMORY.md ./MEMORY.md
 cp /tmp/open-teams/skills/code-review ./skills/code-review -r
 
-# Edit AGENTS.md: fill in your project's context
-# Your AI now has team-level context from session one
+# Open your AI tool in the project directory.
+# AI reads AGENTS.md and adapts the workspace to your project
+# through conversation — no manual editing needed.
 ```
 
 ---
 
 ## First Workspace Setup
 
-### 1. Customize AGENTS.md
+Open your AI coding tool in the workspace directory. The AI reads `AGENTS.md` and starts a conversation to understand your project. **You talk, AI writes.** Quickest path: tell your AI about your project and let it handle the rest.
 
-This is the file your AI reads first. Make it yours:
+For reference, here's what a fully adapted workspace looks like after the AI conversation:
+
+### AGENTS.md (after AI adaptation)
+
+Your AI will fill AGENTS.md with information like this, based on your conversation:
 
 ```markdown
 # AGENTS.md - Your Project
 
 ## Project Overview
-[Brief description of what you're building]
+[AI asks you and fills this in]
 
 ## Tech Stack
 - Language: TypeScript
@@ -121,11 +128,9 @@ This is the file your AI reads first. Make it yours:
 - All API routes must have input validation
 ```
 
-**Pro tip:** Keep it under 200 lines. If a rule is complex, put it in a Skill instead. AGENTS.md is the constitution — Skills are the legislation.
+### MEMORY.md (after AI adapts it)
 
-### 2. Configure MEMORY.md
-
-This is your AI's long-term memory. Start with:
+Your AI maintains this as it works with you:
 
 ```markdown
 # MEMORY.md
@@ -144,8 +149,6 @@ This is your AI's long-term memory. Start with:
 - Always paginate list endpoints, even if "we won't have that many items"
 ```
 
-**Update this weekly.** After major decisions, after outages, after onboarding. Treat it like a team journal.
-
 ### 3. Select Your Skills
 
 Browse `skills/` and keep what you need. Delete what you don't — dead Skills confuse the AI.
@@ -158,7 +161,7 @@ Browse `skills/` and keep what you need. Delete what you don't — dead Skills c
 | `onboarding` | When new team members join |
 
 Delete a Skill: `rm -rf skills/<skill-name>`
-Customize a Skill: edit `skills/<skill-name>/SKILL.md` and the rules/ inside it.
+Customize a Skill: tell your AI what rules you need — it edits `skills/<skill-name>/SKILL.md` and the rules/ inside it.
 
 ### 4. Verify It Works
 
@@ -236,7 +239,7 @@ Every team member's AI produces this same structure. No more "well, *my* AI does
 
 ### Customizing a Skill
 
-Say your team has specific security rules. Edit `skills/code-review/rules/security.md`:
+Say your team has specific security rules. Tell your AI and it will update `skills/code-review/rules/security.md`:
 
 ```markdown
 # Security Review Rules

@@ -260,12 +260,12 @@ open-teams/
 
 ## Roadmap
 
-| Version | Timeline | Highlights |
-|---------|----------|------------|
-| **v0.1** | Now | Core template: AGENTS.md, MEMORY.md, Skills structure, init.sh |
-| **v0.2** | +2 weeks | Additional Skills (testing, docs generation, system design review), multi-language support |
-| **v0.3** | +1 month | Skills marketplace — share and install community skills, deeper tool integrations |
-| **v1.0** | +3 months | Enterprise features: team management, analytics, CI/CD integration, AI-native project management |
+| Version | Status | Highlights |
+|---------|--------|------------|
+| **v0.1 – v0.4** | ✅ Done | Core template, AGENTS.md governance, 4 core Skills + 6 workflow Skills, init.sh, CI/CD, template validation |
+| **v0.5** | 📋 Planned | VS Code extension, CLI tool enhancements |
+| **v0.6** | 📋 Planned | Web Dashboard, workspace health visualization |
+| **v1.0** | 📋 Planned | Skills marketplace, team analytics, enterprise features |
 
 > 💡 Have a feature idea? [Open a Discussion](https://github.com/struggling-bird/open-teams/discussions/categories/ideas).
 

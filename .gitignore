@@ -1,4 +1,9 @@
+# OS
 .DS_Store
+Thumbs.db
+
+# open-teams
+TOOLS.md
 sources/*
 !sources/README.md
 
