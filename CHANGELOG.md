@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.3] — 2026-06-25
+
 ### Added
-- Non-code contributions guide in `CONTRIBUTING.md` covering documentation, translations, design, 
-  and community support ([#12](https://github.com/struggling-bird/open-teams/issues/12))
+- 「首次会话初始化工作口令」：AI 检测 `MEMORY.md` 模板占位内容后自动触发引导式对话，按顺序收集业务背景、技术概况、团队情况、参考材料和工作语言，随后深度阅读源码并生成初始长期记忆
+- 「契约维护原则」：明确约束工作空间契约文件（`AGENTS.md`、`MEMORY.md`、`docs/`、`skills/`）必须通过对话生成和维护，禁止手动编辑
+- `QUICKSTART.md` 步骤 2 重写为对话式初始化流程描述，替代模糊的「让 AI 接管」表述
 
 ## [v0.4.2] — 2026-06-23
 
