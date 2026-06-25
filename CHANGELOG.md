@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.3] — 2026-06-25
+
 ### Added
 - 「首次会话初始化工作口令」：AI 检测 `MEMORY.md` 模板占位内容后自动触发引导式对话，按顺序收集业务背景、技术概况、团队情况、参考材料和工作语言，随后深度阅读源码并生成初始长期记忆
 - 「契约维护原则」：明确约束工作空间契约文件（`AGENTS.md`、`MEMORY.md`、`docs/`、`skills/`）必须通过对话生成和维护，禁止手动编辑
