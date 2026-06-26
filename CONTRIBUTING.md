@@ -10,12 +10,15 @@ This guide will help you get started.
 
 - [Code of Conduct](#code-of-conduct)
 - [Ways to Contribute](#ways-to-contribute)
+- [Non-Code Contributions](#non-code-contributions)
+  - [Documentation](#documentation)
+  - [Translations](#translations)
+  - [Design](#design)
+  - [Community Support](#community-support)
 - [Development Setup](#development-setup)
 - [Code Style](#code-style)
 - [Pull Request Process](#pull-request-process)
 - [Issue Guidelines](#issue-guidelines)
-- [Documentation](#documentation)
-- [Community](#community)
 - [License](#license)
 
 ---
@@ -34,12 +37,225 @@ This project and everyone participating in it is governed by our [Code of Conduc
 | 💡 **Feature requests** | Propose new features with use cases | Everyone |
 | 📝 **Documentation** | Fix typos, improve docs, write tutorials | First-time contributors |
 | 💻 **Code** | Fix bugs, implement features, improve tests | Developers |
-| 🎨 **Design** | Improve UI/UX of workspace templates | Designers |
+| 🎨 **Design** | Improve visual assets, diagrams, workspace templates | Designers |
+| 🌍 **Translations** | Translate docs into other languages | Bilingual contributors |
+| 🤝 **Community** | Answer questions, share the project, write blog posts | Everyone |
 | 🧪 **Testing** | Write tests, test edge cases, report flaky tests | QA-minded devs |
-| 🌍 **Community** | Answer questions, share the project, write blog posts | Everyone |
 | 🔒 **Security** | Report vulnerabilities responsibly | Security researchers |
 
 **First time?** Look for issues labeled [`good first issue`](https://github.com/struggling-bird/open-teams/labels/good%20first%20issue) or [`help wanted`](https://github.com/struggling-bird/open-teams/labels/help%20wanted).
+
+**Not a developer?** The sections below are written specifically for you. No code required.
+
+---
+
+## Non-Code Contributions
+
+open-teams improves just as much from good docs, accurate translations, clear diagrams, and an active community as it does from code. This section explains exactly how to contribute each type.
+
+### Documentation
+
+Documentation lives alongside the code and is treated as a first-class part of the project. You do not need to be a developer to improve it, you just need to read carefully and write clearly.
+
+#### What counts as a documentation contribution
+
+- **Fixing errors**: typos, broken links, outdated commands, wrong file paths
+- **Improving clarity**: rewriting confusing explanations, adding missing context, shortening verbose sections
+- **Adding examples**: real-world usage scenarios that show how a feature works end-to-end
+- **Writing guides**: tutorials, how-tos, or walkthroughs for specific use cases
+- **Updating stale content**: docs that no longer match what the project actually does
+
+#### Where docs live
+
+| File/Directory | Purpose |
+|---|---|
+| `README.md` | Project overview, quick start, feature summary |
+| `CONTRIBUTING.md` | This file — contributor guidelines |
+| `QUICKSTART.md` | Fast onboarding guide for new users |
+| `AGENTS.md` | Instructions for AI agents working in the workspace |
+| `TOOLS.md` | Reference for available tools and scripts |
+| `docs/` | Extended documentation (guides, references) |
+
+#### How to submit a documentation fix
+
+1. **Small fixes** (typos, broken links): you can edit directly in the GitHub UI, click the pencil icon on any file.
+2. **Larger changes**: fork the repo, make your edits, and open a PR (see [Pull Request Process](#pull-request-process)).
+3. Reference the relevant issue if one exists (e.g., `Fixes #42`).
+
+#### Documentation style guide
+
+- Write in plain English. Avoid jargon unless you define it.
+- Use second person ("you") when addressing the reader.
+- Use present tense: "The command runs..." not "The command will run..."
+- Keep sentences short. One idea per sentence.
+- Use code blocks for all commands, file paths, and code snippets, even short ones.
+- Prefer concrete examples over abstract descriptions.
+
+---
+
+### Translations
+
+open-teams is used by people across different languages and regions. Translating the docs makes the project accessible to a wider audience. The project already maintains a Chinese translation (`README.zh-CN.md`) and welcomes additional languages.
+
+#### What can be translated
+
+| File | Priority | Notes |
+|---|---|---|
+| `README.md` | High | Main entry point for new users |
+| `QUICKSTART.md` | High | Critical for fast onboarding |
+| `CONTRIBUTING.md` | Medium | Helps non-English contributors participate |
+| `AGENTS.md` | Medium | Important for AI tool configuration |
+| `TOOLS.md` | Low | Reference material, lower urgency |
+
+#### File naming convention
+
+Follow the pattern already used in the project:
+
+```
+README.md           → README.{lang}.md
+QUICKSTART.md       → QUICKSTART.{lang}.md
+CONTRIBUTING.md     → CONTRIBUTING.{lang}.md
+```
+
+Use [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) two-letter language codes. For regional variants, append the region: `pt-BR` (Brazilian Portuguese), `zh-TW` (Traditional Chinese).
+
+**Examples:**
+```
+README.id.md        ← Indonesian
+README.ja.md        ← Japanese
+README.pt-BR.md     ← Brazilian Portuguese
+README.de.md        ← German
+README.fr.md        ← French
+```
+
+#### How to submit a translation
+
+1. **Check open issues and PRs first**, someone may already be working on the same language. Search for your language name or code in [Issues](https://github.com/struggling-bird/open-teams/issues) and [Pull Requests](https://github.com/struggling-bird/open-teams/pulls).
+
+2. **Open an issue** before starting a large translation. Title it `[Translation] Add {Language} translation` and mention which files you plan to translate. This prevents duplicate work.
+
+3. **Fork the repo** and create a branch:
+   ```bash
+   git checkout -b translation/add-indonesian
+   ```
+
+4. **Translate the file(s)**. A few guidelines:
+   - Keep all Markdown formatting intact (headers, code blocks, links, badges)
+   - Do not translate code blocks, commands, file paths, or variable names
+   - Do not translate proper nouns like `open-teams`, `AGENTS.md`, `Cursor`, `Copilot`
+   - Translate UI text and prose only
+   - When in doubt about a technical term, keep the English term and add a brief explanation in parentheses
+
+5. **Update the language switcher** in `README.md` if your translation adds a new language. The existing pattern is at the top of the file:
+   ```html
+   <p align="center">
+     <strong>English</strong> | <a href="README.zh-CN.md">中文</a>
+   </p>
+   ```
+   Add your language to this list.
+
+6. **Submit a PR** (see [Pull Request Process](#pull-request-process)). In the PR description, note:
+   - Which files you translated
+   - Your language and locale
+   - Whether this is a full or partial translation
+
+#### Keeping translations in sync
+
+When the English source changes, translations may fall out of date. If you notice a translation that is outdated compared to the English version, open an issue tagged `translation` or submit a PR with the updated sections. You do not need to be the original translator to update one.
+
+---
+
+### Design
+
+Design contributions improve how the project looks and how clearly it communicates. This includes visual assets, diagrams, workspace layout improvements, and UX feedback on the template structure.
+
+#### Types of design contributions
+
+**Visual assets**
+- Logo refinements (current logo: `assets/logo.svg`)
+- Badge designs for the README
+- Social preview images for GitHub/social sharing
+- Animated demos or screen recordings showing how the workspace works
+
+**Diagrams and illustrations**
+- Architecture diagrams explaining how open-teams workspace components connect
+- Flowcharts for the AI collaboration workflow
+- Annotated screenshots for the quickstart guide
+
+**Workspace template design**
+- Improvements to the structure or formatting of core files (`AGENTS.md`, `MEMORY.md`, `TOOLS.md`)
+- Better organization of the `skills/` or `workspace-config/` directories
+- Clearer visual separation within Markdown files using tables, callout blocks, or diagrams
+
+**UX feedback**
+- If you tried setting up the workspace and found a step confusing, that is a valid design contribution. Open an issue describing the friction point and what would have made it clearer.
+
+#### Design file formats
+
+| Format | When to use |
+|---|---|
+| SVG | Logos, icons, diagrams — preferred for anything that needs to scale |
+| PNG | Screenshots, raster illustrations (export at 2x for retina) |
+| Mermaid (`.md` embedded) | Diagrams inside Markdown files — keeps them version-controllable |
+| GIF/WebP | Animated demos in README |
+
+#### How to submit a design contribution
+
+1. **Open an issue first** for anything beyond small asset tweaks. Describe what you want to improve and why, and share a rough concept if you have one. Design is subjective, getting early feedback saves iteration time.
+2. For asset additions/replacements, put new files in `assets/` and reference them from the relevant Markdown file.
+3. For diagram proposals using Mermaid, you can embed them directly in a GitHub issue comment to get feedback before submitting a PR.
+4. Submit a PR with a clear description of what changed and why, including before/after screenshots where relevant.
+
+---
+
+### Community Support
+
+Community contributors help the project grow by supporting users, spreading the word, and keeping discussions healthy. This is one of the highest-leverage ways to contribute — a helpful answer in a Discussion can benefit dozens of future readers.
+
+#### Answering questions in GitHub Discussions
+
+The [Discussions board](https://github.com/struggling-bird/open-teams/discussions) is where users ask for help, share how they use the project, and propose ideas.
+
+- Check the Discussions board periodically for unanswered questions
+- Share what you know, you do not have to know everything to be helpful
+- If you are not sure of an answer, say so and suggest where to look
+- Link to relevant docs, issues, or PRs when they exist
+- Mark answers as helpful when a discussion gets resolved (if you are the OP)
+
+#### Issue triage
+
+Triaging issues means reviewing new issues and helping maintainers understand them faster.
+
+Things you can do without special permissions:
+- Reproduce a reported bug and confirm or deny it
+- Ask for missing information on bug reports (OS, version, reproduction steps)
+- Add `👍` reactions to issues you can also reproduce
+- Link duplicate issues together in a comment
+- Search for and reference existing related issues or PRs
+
+#### Sharing the project
+
+The simplest community contribution: star the repo and tell someone who might find it useful.
+
+More impactful:
+- Write a blog post or dev.to article about how you use open-teams in your workflow
+- Share the project in relevant communities (Discord servers, Slack workspaces, subreddits, forums)
+- Mention it in conference talks or meetup presentations
+- Record a short demo video or tutorial
+
+When sharing, please be accurate about what the project does and does not do. Avoid overclaiming.
+
+#### Writing tutorials and case studies
+
+If you have built something interesting on top of open-teams, or found a particularly effective way to configure the workspace for a specific team type, consider writing it up and submitting it to the `docs/` directory as a tutorial or case study.
+
+A useful tutorial includes:
+- The specific problem or use case
+- Step-by-step setup instructions
+- What the result looks like (screenshots, file listings)
+- Any gotchas or tradeoffs you encountered
+
+Open an issue or [start a Discussion](https://github.com/struggling-bird/open-teams/discussions) to propose a tutorial before writing it, maintainers can give early feedback and ensure it fits the docs structure.
 
 ---
 
@@ -210,34 +426,6 @@ Use the [Feature Request template](https://github.com/struggling-bird/open-teams
 - Your proposed solution
 - Alternatives you've considered
 - Who would benefit
-
----
-
-## Documentation
-
-Documentation lives in the `docs/` directory and is just as important as code.
-
-### What to Document
-
-- New features or significant changes
-- CLI commands and options
-- Configuration files and formats
-- API interfaces
-- Tutorials and examples
-
-### Style
-
-- Write in clear, simple English
-- Use code blocks for commands and snippets
-- Keep it beginner-friendly — assume the reader is new to the project
-
----
-
-## Community
-
-- **Discussions**: Use [GitHub Discussions](https://github.com/struggling-bird/open-teams/discussions) for questions, ideas, and community conversations.
-- **Issues**: Use [Issues](https://github.com/struggling-bird/open-teams/issues) for bugs and specific feature requests.
-- **Be respectful**: We're building something together. Assume good intentions.
 
 ---
 
