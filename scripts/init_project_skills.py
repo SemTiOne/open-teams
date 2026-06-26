@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+"""Initialize project-scoped skills from workspace templates.
+
+Copies skill templates from skills/_templates/project/ into a project workspace,
+tailoring them for the specific project context.
+
+Usage:
+    python3 scripts/init_project_skills.py [project_dir]
+"""
 
 from pathlib import Path
 import shutil

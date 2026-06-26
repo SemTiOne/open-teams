@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+"""Prepare a clean workspace by removing template adoption artifacts.
+
+Removes task-plans/, change-history/, and other adoption scaffolding
+that is not needed after a workspace has been fully initialized.
+
+Usage:
+    python3 scripts/prepare_clean_workspace.py [workspace_dir]
+"""
 
 from pathlib import Path
 import argparse
