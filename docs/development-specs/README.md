@@ -14,3 +14,4 @@
 - [工作空间版本规则](./workspace-versioning.md)：定义版本号规则、版本记录格式，以及 `CHANGELOG.md`、`workspace-version.yaml` 和 `change-history/` 的职责边界。
 - [工作空间版本维护与升级模型](./workspace-upgrade-model.md)：定义版本元信息、升级边界、本地定制保护和提示词驱动升级流程。
 - [工作空间升级提示词](./workspace-upgrade-prompts.md)：提供可直接复制给 AI 的升级检查、规划、实施、验证和收口提示词。
+- [工作空间版本迁移指南](./workspace-migration-guide.md)：给已采用模板的用户看的升级操作手册，含常见迁移场景和故障回退。
