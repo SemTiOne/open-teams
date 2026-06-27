@@ -1,29 +1,79 @@
-# api-design-review
+# API Design Review — 设计规范
 
-## Purpose
+## 适用范围
 
-Review REST and GraphQL API designs for consistency, security, and usability. Ensure all endpoints across the team follow shared conventions and best practices.
+RESTful API 和 GraphQL API 设计审查。所有涉及接口创建、修改、公开的场景。
 
-## When to Use
+## 触发条件
 
-- When creating or modifying API endpoints
-- Before finalizing an API specification or OpenAPI document
-- When asked to "review this API" or "check endpoint design"
+- 用户说"审查这个 API"、"检查接口设计"、"review this endpoint"
+- 准备发布新 API 或修改现有 API 时
+- OpenAPI 文档定稿前
 
-## Structure
+## 前置输入
 
-- `SKILL.md` — This file: the review workflow and report format
-- `rules/` — Enforceable API design rules with severity and rationale
+- API 规格文档（OpenAPI/Swagger、接口文档、或代码中的路由定义）
+- 项目 AGENTS.md 中的技术栈和规范
+- 团队已有的 API 约定（命名、版本、错误格式）
 
-## Quick Example
+## 产物与退出条件
+
+- 产物：结构化审查报告，含严重级别、位置、问题描述和修复建议
+- 退出条件：所有 Critical/High 项已修复或有明确处理计划
+
+## 工作流程
+
+1. 确认审查范围——哪些接口、什么阶段（设计 / 开发中 / 即将发布）
+2. 按规则逐项审查：命名 → HTTP 方法 → 响应格式 → 安全 → 兼容性 → 性能 → 文档
+3. 分类报告：
+   - 🔴 Critical：安全漏洞，必须修复
+   - 🟠 High：向后不兼容、严重性能问题，应该修复
+   - 🟡 Medium：规范偏离，建议修复
+   - 🟢 Low：优化建议，可延后
+4. 对每个问题给出：位置、问题、理由、修复建议
+5. 输出总结：通过 / 有条件通过 / 需要重设计
+
+## 报告格式
 
 ```
-User: "Review our /users endpoint design"
-AI: Checks REST conventions -> Verifies auth, pagination, error format
-    -> Report: Uses plural nouns (good), Has pagination (good)
-    -> Issues: Missing rate limiting, no field selection support
+## API Design Review: [接口/功能名称]
+
+### 🔴 Critical（必须修复）
+- **端点:** POST /api/orders
+  **问题:** 未认证即可创建订单
+  **修复:** 添加认证中间件
+
+### 🟠 High（应该修复）
+- **端点:** GET /api/users
+  **问题:** 无分页，可能返回全量数据
+  **修复:** 添加 `?page=&pageSize=` 参数，默认 20，最大 100
+
+### 🟡 Medium（建议修复）
+- **端点:** GET /getUserById
+  **问题:** URL 含动词，不符合 REST 规范
+  **修复:** 改为 `GET /users/:id`
+
+### 🟢 Low（优化建议）
+- **端点:** 全部
+  **问题:** 未支持字段过滤
+  **建议:** 添加 `?fields=` 参数
 ```
 
-## How to Customize
+## 验证清单
 
-Define your team's API conventions in `rules/README.md` — naming patterns, error envelope format, versioning strategy, and authentication standards. Extend the review dimensions to cover GraphQL schemas, gRPC service definitions, or event-driven messaging contracts as your architecture grows.
+- 审查是否覆盖了所有本次变更涉及的端点？
+- 每个问题是否给出了具体的修复建议而不仅是批评？
+- Critical/High 项是否有明确的处理责任人？
+- 规则检查是否引用了 rules/ 中的具体条目？
+
+## 禁止事项
+
+1. 不根据未确认的假设进行安全判断——需要确认认证机制后再下结论
+2. 不推荐与团队已有约定冲突的规范——AGENTS.md > 本 Skill
+3. 不要跳过文档审查——API 没有文档等于没有 API
+
+## 按需资料
+
+- `rules/README.md`：具体规则条目和严重级别
+- `checklist.md`：审查检查清单
+- OpenAPI 3.0 规范（如审查 OpenAPI 文档）

@@ -1,30 +1,109 @@
 # architecture-review
 
-## Purpose
+## 适用范围
 
-Review architectural decisions, system designs, and technical proposals. Ensure significant design choices are documented, justified, and aligned with team principles.
+重大技术决策、系统设计和技术方案审查。包括新组件引入、架构变更、技术选型、和跨模块设计方案。
 
-## When to Use
+## 触发条件
 
-- Before committing to a new system component, pattern, or dependency
-- When evaluating technical proposals or design documents
-- When asked to "review architecture" or "design review"
+- 用户说"审查这个架构"、"设计 review"、"architecture review"、"评估这个方案"
+- 准备引入新的系统组件、服务、数据库或第三方依赖时
+- 技术方案文档或 RFC（Request for Comments）定稿前
+- 跨团队/跨模块的设计决策讨论
 
-## Structure
+## 前置输入
 
-- `SKILL.md` — This file: the review workflow, ADR template, and report format
-- `rules/` — Enforceable architecture rules with severity levels
+- 设计文档或提案（RFC、技术方案、架构图）
+- 项目 AGENTS.md 中的技术栈和架构约定
+- 团队已有的架构原则和 ADR 记录
+- 当前系统的架构现状（知道改什么，才知道影响什么）
 
-## Quick Example
+## 产物与退出条件
+
+- 产物：结构化架构审查报告，含风险等级、问题分析、替代建议和决策记录建议
+- 退出条件：所有 Critical/High 项已解决或有明确处理计划；ADR 已草拟
+
+## 工作流程
+
+1. **理解问题域** — 先确认要解决什么问题，为什么现在解决，不解决会怎样
+2. **审查方案** — 按 rules/ 逐项检查：决策质量 → NFR → 依赖 → 数据 → 实施
+3. **评估替代方案** — 是否充分比较了备选？推荐方案的理由是否充分？
+4. **识别风险和盲区** — 什么情况下方案会失败？团队是否有运维能力？
+5. **结构化报告** — 按严重级别分类问题，给出具体建议
+6. **推动决策记录** — 建议草拟 ADR，格式见下方模板
+
+## ADR 模板
+
+```markdown
+# [YYYY-MM-DD] 决策标题
+
+## Context
+为什么需要这个决策？当前状态是什么？有哪些约束？
+
+## Decision
+我们选择了什么方案？核心思路是什么？
+
+## Alternatives Considered
+| 方案 | 优点 | 缺点 | 为什么没选 |
+|------|------|------|-----------|
+| 方案 A | ... | ... | ... |
+| 方案 B | ... | ... | ... |
+| 不做改动 | ... | ... | ... |
+
+## Consequences
+- 正面影响：
+- 负面影响和风险：
+- 需要注意什么？
+```
+
+## 审查报告格式
 
 ```
-User: "Review the proposal to add Redis caching layer"
-AI: Checks design doc -> Verifies alternatives considered, scalability path, cost
-    -> Report: Clear problem statement (good), 2 alternatives evaluated (good)
-    -> Concerns: No failure mode analysis for cache miss storms
-    -> Recommendation: Add circuit breaker + graceful degradation plan
+## Architecture Review: [方案/系统名称]
+
+### 审查结论: ✅ 通过 / ⚠️ 有条件通过 / ❌ 需要重新设计
+
+### 🔴 Critical（阻塞·安全/可靠性）
+- **问题:** [单点故障描述]
+  **影响:** [故障范围]
+  **建议:** [修复方案]
+
+### 🟠 High（必须修复·决策质量）
+- **问题:** [缺少替代方案对比]
+  **建议:** [补充 2 个备选方案]
+
+### 🟡 Medium（建议修复·架构卫生）
+- **问题:** [模块职责重叠]
+  **建议:** [重新划分边界]
+
+### 🟢 Low（优化建议）
+- **问题:** [可观测性不足]
+  **建议:** [添加关键指标]
+
+### 推荐的 ADR
+- [建议记录的决策 1]
+- [建议记录的决策 2]
 ```
 
-## How to Customize
+## 验证清单
 
-Define your team's architectural principles in `rules/README.md`. Customize the ADR template with your preferred sections and decision categories. Add technology-specific review dimensions (e.g., event-driven patterns, microservice boundaries, data consistency models) as your system evolves.
+- 审查是否覆盖了所有 NFR 维度（扩展性/可用性/性能/安全/成本/可维护性）？
+- 每个 Critical/High 问题是否有具体解决方案而不仅是批评？
+- 是否审视了隐含假设？（"我们假设 Redis 不会挂"→ 这就是单点风险）
+- 是否明确了"不做什么"？（范围越界 = 架构膨胀）
+- 建议是否对应具体规则条目（ARCH-xxx）？
+
+## 禁止事项
+
+1. 不在理解问题域之前就开始评价方案——先问"解决什么问题"
+2. 不以个人偏好替代规则判断——引 rules/ 对应条目
+3. 不忽视团队实际运维能力——推荐团队不会运维的架构 = 埋坑
+4. 不在缺少数据的情况下做成本/性能假设——标注"需要验证"而非下结论
+5. 不推荐未经团队讨论过的大型架构变更——架构迁移是人+技术的事，不是纯技术决策
+
+## 按需资料
+
+- `rules/README.md`：具体规则条目和严重级别
+- `checklist.md`：逐项审查检查清单
+- `docs/overall-architecture/README.md`：项目整体架构说明
+- `docs/development-specs/`：治理规范参考

@@ -1,7 +1,7 @@
 template:
   id: open-teams
-  version: 0.4.2
-  revision: template-health-and-init-entrypoints
+  version: 0.4.3
+  revision: first-session-init-and-contract-maintenance
   source: local-template
   changelog_path: CHANGELOG.md
   versioning_doc_path: docs/development-specs/workspace-versioning.md

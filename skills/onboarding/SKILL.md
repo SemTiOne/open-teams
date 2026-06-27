@@ -1,30 +1,96 @@
 # onboarding
 
-## Purpose
+## 适用范围
 
-Guide new team members through their first days on the project. The AI assistant acts as an onboarding buddy — answering questions, pointing to documentation, and walking through the codebase.
+新团队成员或贡献者加入项目时的引导流程。本 Skill 提供工作流骨架——**具体内容需要在首次对话时由 AI 根据你的团队实际情况填充。**
 
-## When to Use
+## 触发条件
 
-- When a new team member joins and needs orientation
-- When someone says "onboard me", "I'm new here", or "help me get started"
-- As reference for creating team-specific onboarding materials
+- 新团队成员说"我刚加入"、"帮我上手"、"onboard me"、"get started"
+- 有人需要了解项目结构、开发环境配置、工作流程
+- 作为创建团队专属 onboarding 材料时的参考模板
 
-## Structure
+## ⚠️ 首次使用前必读
 
-- `SKILL.md` — This file: the phased onboarding workflow and AI buddy guidelines
-
-## Quick Example
+**本 Skill 是模板骨架，不是成品。** 直接使用会给出不准确的引导。请先让 AI 完成定制：
 
 ```
-New member: "I just joined — where do I start?"
-AI: Welcomes them -> Explains project mission from README
-    -> Shows repo structure (docs/, skills/, workspace-config/)
-    -> Walks through AGENTS.md (team constitution)
-    -> Helps with first setup step (clone, install deps)
-    -> Suggests a tiny first task: fix a typo in README
+"根据我们团队的实际开发环境和工作流，填充 onboarding skill。
+包括：开发环境配置步骤、必备工具账号、代码仓库地址、
+CI/CD 流程、代码审查规范、以及推荐的第一个上手任务。"
 ```
 
-## How to Customize
+AI 会通过对话收集以下信息并写入本目录：
+- 团队开发环境（操作系统、工具链）
+- 必备账号和权限申请流程
+- 代码仓库结构和分支策略
+- CI/CD 和部署流程
+- 团队沟通渠道和会议节奏
+- 适合新人的第一个任务
 
-Adjust the onboarding phases to match your team's ramp-up timeline. Add team-specific setup steps (development environment, access requests, tool accounts). Create project-specific onboarding checklists for different roles (frontend, backend, infrastructure). The AI buddy should adapt its tone and pace to your team's culture.
+## 前置输入
+
+- 团队 AGENTS.md（项目上下文、技术栈、规范）
+- 团队 MEMORY.md（决策历史、经验教训）
+- `docs/projects/<project>/`（项目文档入口）
+- 团队沟通渠道信息
+
+## 产物与退出条件
+
+- 产物：新人完成环境配置、理解项目结构和基本工作流、完成第一个小任务
+- 退出条件：新人能够独立运行项目、了解代码审查流程、知道遇到问题时找什么文档/找谁
+
+## 工作流程
+
+### Phase 1：欢迎与概览（Day 1，~30 min）
+
+1. 欢迎新成员，介绍项目使命和团队文化
+2. 指向 README 了解项目概况
+3. 指向 AGENTS.md 了解技术栈和约定
+4. 指向 MEMORY.md 了解关键决策
+
+### Phase 2：环境配置（Day 1，~2 hours）
+
+1. 引导完成开发环境配置
+2. 确认可运行项目和测试
+3. 配置 AI 编码工具（如适用）
+
+### Phase 3：代码库导览（Day 1-2，~1 hour）
+
+1. 介绍代码仓库结构和核心模块
+2. 走读关键业务流程的代码路径
+3. 介绍 CI/CD 流程和部署方式
+
+### Phase 4：工作流融入（Day 2-3，持续）
+
+1. 介绍代码审查流程和标准
+2. 介绍分支策略和提交规范
+3. 介绍任务管理和沟通渠道
+
+### Phase 5：第一个任务（Day 2-3）
+
+1. 挑选一个适合新人的小任务
+2. 引导完成：编码 → 测试 → 提交 → PR → 审查 → 合并
+3. 复盘：确认是否理解工作流，解答疑问
+
+## 验证清单
+
+- 新人能否独立运行项目？
+- 新人能否找到关键文档？
+- 新人是否完成了一个 PR 的完整流程？
+- 新人是否知道遇到什么问题该找谁/看什么文档？
+- 新人是否知道如何让 AI 辅助自己的工作？
+
+## 禁止事项
+
+1. 不要照搬本模板——必须根据团队实际情况定制
+2. 不要跳过环境配置验证——环境不通，后面都是浪费时间
+3. 不要让新人自己摸索——主动引导、主动解答
+4. 不要第一个任务太难——目标是跑通流程，不是展示技术难度
+5. 不要让新人读所有文档——按需引导，过载 = 无效
+
+## 按需资料
+
+- `skills/code-review/SKILL.md`：让新人了解代码审查标准
+- `CONTRIBUTING.md`：贡献流程说明
+- 团队内部 Wiki 或知识库链接（如有）

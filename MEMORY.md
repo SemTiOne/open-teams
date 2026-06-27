@@ -1,39 +1,137 @@
-# MEMORY.md — Team Long-Term Memory
+# MEMORY.md — 项目长期记忆
 
-## Purpose
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  MEMORY.md 定位：存判断，不存事实。
 
-This file stores your team's key decisions, lessons learned, and architecture rationale across sessions. Your AI tools read MEMORY.md to maintain context about why things were built the way they were.
+  事实去哪了？
+  - 「今天发生了什么」         → memory/YYYY-MM-DD.md（日记）
+  - 「这个东西怎么工作」       → docs/（文档）
+  - 「那次改了什么」           → change-history/（变更记录）
+  - 「正在做什么」             → task-plans/（任务方案）
+  - 「外部参考资料」           → references/
 
-Think of it as your team's curated long-term memory — not a daily log, but the distilled wisdom that persists across sessions and team members.
+  MEMORY.md 只存不可从其他文件自动反推的元知识：
+  - 决策背景和理由（为什么选 A 不选 B）
+  - 教训和踩过的坑（下次别重复）
+  - 偏好和硬约束（老板/团队的习惯和红线）
+  - 里程碑快照（什么时间点达到了什么状态）
 
-## How to Use
+  什么时候该更新 MEMORY.md？
+  - 做了一个影响深远的架构/策略决策
+  - 踩了一个值得全队知道的坑
+  - 老板明确了一条需要长期遵守的规则
+  - 项目达到了一个新的里程碑
+  - 发现旧决策不再适用，需要修订
 
-This file is maintained by AI through conversation — not manually edited. Your AI reads this at the start of every session.
+  什么时候不该往这写？
+  - 今天的任务进度 → 日记
+  - 某个功能的实现细节 → docs/
+  - 暂时性的想法或计划 → task-plans/
+  ═══════════════════════════════════════════════════════════════════
+-->
 
-- Write down significant architectural decisions and the reasoning behind them
-- Record lessons learned from successes and failures
-- Document project identity and team conventions
-- Update it after major milestones, pivots, or retrospectives
-- Keep it concise — this is for AI context, not exhaustive documentation
-- Review and prune periodically to keep context fresh
+> 持久化的项目知识、决策记录和经验教训。
 
-## Template (AI fills this as it learns about your team)
+<!-- 首次对话时，AI 会帮你填写以下内容。你也可以手动编辑。 -->
 
-### Project Identity
-- **Project:** (AI will ask and fill this in)
-- **Goal:** (AI will ask and fill this in)
-- **License:** (AI will ask and fill this in)
-- **Created:** (AI will ask and fill this in)
+## Project Identity
 
-### Key Decisions
-_(AI records each decision here with date, rationale, and trade-offs)_
+<!--
+  项目的基本盘。项目名、一句话描述、许可证、仓库地址。
+  创建项目时填写一次，后续基本不变。
+-->
 
-### Lessons Learned
-_(AI records each lesson here with date, what happened, and what we learned)_
+| 属性 | 值 |
+|------|-----|
+| **项目** | <!-- 项目名称 --> |
+| **目标** | <!-- 一句话，项目要达成什么（如：10,000 Stars、成为某领域标准） --> |
+| **许可证** | <!-- MIT / Apache 2.0 / GPL / ... --> |
+| **创建日** | <!-- YYYY-MM-DD --> |
+| **仓库** | <!-- https://github.com/owner/repo --> |
 
-### Architecture Notes
-_(AI records patterns and conventions with rationale)_
+## Key Decisions
 
-### Team
-- **Maintainers:** (AI will ask and fill this in)
-- **Repository:** (AI will ask and fill this in)
+<!--
+  记录「做过的重大选择 + 理由」。
+  - 决策：做了什么选择？
+  - 理由：为什么这样做而不是另一种？当时有哪些约束？
+  
+  什么算「重大」？影响架构方向、技术栈、发布策略、协作模式的决策。
+  日常选择（用哪个 npm 包、变量叫什么）不在这记录。
+  
+  如果某个旧决策被推翻了，追加一条新决策并标注「覆盖 XXXX-XX-XX 决策」。
+-->
+
+| 日期 | 决策 | 理由 |
+|------|------|------|
+| <!-- YYYY-MM-DD --> | <!-- 决策内容 --> | <!-- 为什么这样选 --> |
+
+## Quality Rules
+
+<!--
+  从经验中沉淀的硬约束——「我们永远/绝不这么做」。
+  
+  来源：
+  - 老板明确强调过的规范
+  - 踩过坑后建立的防护规则
+  - 产出物/代码/协作的质量红线
+  
+  每条规则要能直接执行，不能是模糊的建议。
+  如果规则有例外，写清楚例外条件。
+-->
+
+| # | 规则 | 来源 |
+|---|------|------|
+| 1 | <!-- 规则内容 --> | <!-- 谁/什么时候定的 --> |
+
+## Milestones
+
+<!--
+  项目从创建到各阶段关键节点的快照。
+  不是每天的 Stars 变化（那是日记的事），而是在关键时间点上的状态。
+  
+  记录时机：
+  - 首个 Release 发布
+  - 突破某个 Stars 数量级（100 / 500 / 1,000 / 5,000 / 10,000）
+  - 重大功能上线
+  - 被重要平台/媒体报道
+  
+  格式：日期 | 数据 | 事件
+-->
+
+| 日期 | Stars | 事件 |
+|------|-------|------|
+| <!-- YYYY-MM-DD --> | 0 | 仓库创建 |
+
+## Lessons Learned
+
+<!--
+  每次踩坑后的总结。不是日记里的一句话带过，而是结构化记录。
+  
+  必须包含：
+  - 日期：什么时候发生的
+  - 事件：发生了什么
+  - 教训：学到了什么规则/原则
+  - 后果：这个教训带来了什么改变（链接到 Key Decisions / Quality Rules 中的条目）
+  
+  好的教训是「可执行的」——下次遇到类似场景，你明确知道该怎么做/不该怎么做。
+  
+  不要写模糊的「当时应该更小心」——要写「从此以后提交前必须跑 npm run lint」。
+-->
+
+| 日期 | 事件 | 教训 | 后续改变 |
+|------|------|------|----------|
+| <!-- YYYY-MM-DD --> | <!-- 发生了什么 --> | <!-- 学到了什么 --> | <!-- 关联的决策/规则 --> |
+
+## Contact
+
+<!--
+  项目 Owner 和主要联系方式。对外公开用。
+-->
+
+| 属性 | 值 |
+|------|-----|
+| **Owner** | <!-- 名字/GitHub 用户名 --> |
+| **Email** | <!-- 联系邮箱 --> |
+| **GitHub** | <!-- https://github.com/owner/repo --> |
