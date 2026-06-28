@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `skills/api-design-review/examples.md`: 3 real-world API review examples (clean/needs-work/rejected)
 - `skills/architecture-review/checklist.md`: 5-category review checklist (problem, solution, NFRs, integration, implementation)
 - `skills/architecture-review/examples.md`: 3 real-world architecture review examples (pass/fail/conditional)
-- `skills/onboarding/SKILL.md`: 5-phase onboarding workflow with AI-driven customization prompt (template skeleton, not pre-filled)
+- `docs/development-specs/workspace-migration-guide.md`: version upgrade manual with 3-step upgrade workflow, 3 migration scenarios (PATCH/MINOR/跨版本), local customization protection matrix, rollback guide, and FAQ
 
 ### Changed
 - `MEMORY.md`: restructured from single-line placeholder to guided template with 6 sections, per-section AI fill-in annotations, and boundary documentation distinguishing it from diary/docs/change-history

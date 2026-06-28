@@ -31,21 +31,9 @@ Every task progresses through three phases defined in `task-completion-checklist
 
 | Task | Owner | Status | Started | Phase | Stage | Next Action |
 |------|-------|--------|---------|-------|-------|-------------|
-| 工作空间版本记录机制 | struggling-bird | 已完成 | 2026-05-26 | 阶段一 → 阶段二 → 阶段三 | 已归档 | 节点 1+2 均验收通过 |
-| TEAM.md + TASKS.md 新增 | AI (ot-ops) | 进行中 | 2026-06-27 | 阶段一 | 方案设计 | 完成初稿 → 提交 owner review |
+| TEAM.md + TASKS.md 新增 | AI (ot-ops) | 待确认 | 2026-06-27 | 阶段二 | 待 owner review | 老板审阅 TEAM.md / TASKS.md 内容 |
 
 ### Task Details
-
-#### 工作空间版本记录机制
-
-- **Plan:** `task-plans/2026-05-26-feature-refactor-version-records.md`
-- **Phase 1 Status:**
-  - `[x]` 需求明确（用户可读版本记录 + 校验接入）
-  - `[x]` 方案已确认（CHANGELOG + docs + 校验脚本）
-  - `[x]` 节点 1 实施完成并验收通过（版本记录资产与校验接入）
-  - `[x]` 节点 2 实施完成并验收通过（版本迁移指南）
-- **Phase 2 Status:** 全部确认（节点 1+2 均已验收）
-- **Phase 3 Status:** 已归档
 
 #### TEAM.md + TASKS.md 新增
 
@@ -62,8 +50,7 @@ Every task progresses through three phases defined in `task-completion-checklist
 
 | Task | Owner | Completed | Phase Reached | Notes |
 |------|-------|-----------|---------------|-------|
-| 工作空间版本记录机制 | struggling-bird | 2026-06-27 | 阶段三 | 节点 1（版本记录资产）+ 节点 2（迁移指南）均验收 |
-| TEAM.md + TASKS.md 新增 | AI (ot-ops) | 2026-06-27 | 阶段一 | 两个文件已写入 repo 根目录，待 owner 确认 |
+| 工作空间版本记录机制 | struggling-bird | 2026-06-27 | 阶段三（免复盘） | 节点 1（版本记录资产）+ 节点 2（迁移指南）均验收；已归档 change-history |
 
 *(Previous weeks' completed tasks are archived to monthly summary on Sunday.)*
 
