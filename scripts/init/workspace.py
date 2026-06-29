@@ -282,8 +282,8 @@ def init_workspace(
     print(f"\n{Style.BOLD}{Style.BRIGHT_GREEN}🎉 Workspace created at {target}!{Style.RESET}\n")
     print(f"   {Style.BOLD}Next steps:{Style.RESET}")
     print(f"     cd {target.name}")
-    print(f"     open-teams status")
-    print(f"     open-teams new-skill my-first-skill\n")
+    print("     open-teams status")
+    print("     open-teams new-skill my-first-skill\n")
 
     return 0 if errors == 0 else 1
 

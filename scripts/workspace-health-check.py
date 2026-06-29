@@ -34,7 +34,7 @@ import argparse
 import json
 import os
 import sys
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
@@ -484,7 +484,7 @@ def check_required_files(workspace: Path, report: HealthReport) -> None:
                 severity=Severity.ERROR,
                 message=f"Missing file: {file_path} ({description})",
                 path=file_path,
-                recommendation=f"Run `open-teams init` to regenerate, or create it manually.",
+                recommendation="Run `open-teams init` to regenerate, or create it manually.",
             ))
 
 
@@ -798,6 +798,76 @@ def check_skills_health(workspace: Path, report: HealthReport) -> None:
             ))
 
 
+
+# ---------------------------------------------------------------------------
+# Python quality check (ruff)
+# ---------------------------------------------------------------------------
+
+
+def check_python_quality(workspace: Path, report: HealthReport) -> None:
+    """Run ruff against the workspace scripts if ruff is available.
+
+    Reads config from workspace-config/pyproject.toml. When ruff is not
+    installed the check is skipped with an INFO finding so the report
+    remains useful without requiring contributors to have the tool locally.
+
+    Args:
+        workspace: The workspace root directory.
+        report: The HealthReport to add findings to.
+    """
+    import shutil
+    import subprocess
+
+    ruff_bin = shutil.which("ruff")
+    if ruff_bin is None:
+        report.add(Finding(
+            category="Python Quality",
+            severity=Severity.INFO,
+            message="ruff not found — skipping lint check",
+            recommendation="Install ruff: pip install ruff",
+        ))
+        return
+
+    scripts_dir = workspace / "scripts"
+    if not scripts_dir.is_dir():
+        report.add(Finding(
+            category="Python Quality",
+            severity=Severity.INFO,
+            message="scripts/ directory not found — skipping lint check",
+        ))
+        return
+
+    config_path = workspace / "workspace-config" / "pyproject.toml"
+    cmd = [ruff_bin, "check", str(scripts_dir)]
+    if config_path.is_file():
+        cmd += ["--config", str(config_path)]
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        check=False,
+        cwd=str(workspace),
+    )
+
+    if result.returncode == 0:
+        report.add(Finding(
+            category="Python Quality",
+            severity=Severity.OK,
+            message="ruff: no lint issues found in scripts/",
+            path="scripts/",
+        ))
+    else:
+        output = (result.stdout or result.stderr or "").strip()
+        report.add(Finding(
+            category="Python Quality",
+            severity=Severity.WARNING,
+            message="ruff reported lint issues in scripts/",
+            path="scripts/",
+            recommendation=output.splitlines()[0] if output else "Run `ruff check scripts/` for details.",
+        ))
+
+
 # ---------------------------------------------------------------------------
 # Utility functions
 # ---------------------------------------------------------------------------
@@ -863,7 +933,7 @@ def _dir_size(path: Path) -> int:
 # ---------------------------------------------------------------------------
 
 
-def run_health_check(workspace: Path) -> HealthReport:
+def run_health_check(workspace: Path, *, force_template_mode: bool = False) -> HealthReport:
     """Run all health checks on a workspace.
 
     Args:
@@ -878,7 +948,7 @@ def run_health_check(workspace: Path) -> HealthReport:
     )
 
     adoption_mode = _read_adoption_mode(workspace)
-    if adoption_mode == "template":
+    if force_template_mode or adoption_mode == "template":
         check_template_repository(workspace, report)
         check_change_history(workspace, report)
         check_docs_coverage(workspace, report)
@@ -893,6 +963,7 @@ def run_health_check(workspace: Path) -> HealthReport:
     check_docs_coverage(workspace, report)
     check_git_health(workspace, report)
     check_skills_health(workspace, report)
+    check_python_quality(workspace, report)
 
     report.finalize()
     return report
@@ -938,6 +1009,13 @@ Examples:
     )
 
     parser.add_argument(
+        "--template-repo",
+        action="store_true",
+        dest="template_repo",
+        help="Run checks appropriate for the open-teams template repository itself.",
+    )
+
+    parser.add_argument(
         "--version",
         action="version",
         version="open-teams health-check v1.0.0",
@@ -966,7 +1044,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 1
 
     try:
-        report = run_health_check(workspace)
+        report = run_health_check(workspace, force_template_mode=args.template_repo)
     except Exception as exc:
         print(f"Error: Health check failed: {exc}", file=sys.stderr)
         return 1

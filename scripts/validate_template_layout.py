@@ -27,6 +27,7 @@ REQUIRED_PATHS = [
     "workspace-config/code-sources.yaml",
     "workspace-config/workspace-version.yaml",
     "workspace-config/README.md",
+    "workspace-config/pyproject.toml",
     "references/README.md",
     "scripts/adopt_workspace.py",
     "scripts/init_project_skills.py",
