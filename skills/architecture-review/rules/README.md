@@ -1,23 +1,52 @@
-# architecture-review Rules
+# Architecture Review Rules
 
-## ARCH-001: Document Significant Decisions
-**Severity:** High
-Any architectural decision affecting system behavior, cost, or team workflow must be documented as an ADR.
+> 每条规则标注严重级别。架构审查时按要求判断是否阻塞。
 
-## ARCH-002: Consider Alternatives
-**Severity:** Medium
-Every design proposal must compare at least 2 alternatives, including "do nothing."
+---
 
-## ARCH-003: Address Non-Functional Requirements
-**Severity:** High
-All designs must address: scalability limits, availability targets, latency budgets, security model, and cost estimates.
+## 🔴 Critical（阻塞 · 安全/可靠性）
 
-## ARCH-004: Prefer Simplicity
-**Severity:** Medium
-Choose the simplest solution that meets requirements. Complex solutions require stronger justification.
+- **ARCH-CRIT-001: 暴露未加密敏感数据** — 任何涉及用户数据、认证凭证、财务数据的传输或存储必须有加密方案。
+- **ARCH-CRIT-002: 单点故障无处理** — 关键路径上不存在单点故障；或存在但无降级/恢复方案。这包括数据库、消息队列、核心服务。
+- **ARCH-CRIT-003: 无回滚方案** — 涉及数据迁移或 API 变更的方案必须有回滚计划。不能说"改了就改不回来了"。
 
-## Add Your Rules Below
-Customize with your team's architectural principles:
-- Technology selection criteria
-- Integration patterns and anti-patterns
-- Data management and consistency requirements
+---
+
+## 🟠 High（必须修复 · 决策质量）
+
+- **ARCH-001: 重大决策未记录** — 影响系统行为、成本或团队工作流的架构决策，必须有对应的 ADR（决策记录）。
+- **ARCH-002: 至少比较 2 个替代方案** — 每个设计提案必须对比至少 2 个备选方案（含"不做改动"），说明各自取舍。
+- **ARCH-003: 非功能需求覆盖** — 所有设计必须明确回答：可扩展性边界、可用性目标、延迟预算、安全模型、成本估算。
+- **ARCH-004: 依赖评估** — 新增外部依赖（服务、库、数据库）前必须评估：成熟度、社区活跃度、许可证、替代选择。
+
+---
+
+## 🟡 Medium（应该修复 · 架构卫生）
+
+- **ARCH-005: 选择最简单的可行方案** — 当多个方案都能满足需求时，选最简单的。复杂方案需要更强的理由。
+- **ARCH-006: 明确边界和职责** — 每个组件/服务的职责边界清晰。不出现"这个模块什么都做"或"两个模块都做同一件事"。
+- **ARCH-007: 数据一致性模型明确** — 跨服务数据交互时必须说明采用强一致性还是最终一致性，以及为什么。
+- **ARCH-008: 可观测性覆盖** — 关键路径上是否有日志、指标、追踪？没有可观测性的系统 = 生产环境盲飞。
+
+---
+
+## 🟢 Low（优化建议）
+
+- **ARCH-009: 模块间耦合度** — 是否有不必要的紧耦合？新模块是否可以独立测试、独立部署？
+- **ARCH-010: 未来扩展预留** — 设计是否为可预见的增长留了空间？注意：不是过度设计，是"知道往哪扩展"。
+
+---
+
+## 如何添加团队规则
+
+在下方按相同格式添加你的团队专属架构原则：
+
+```
+- **ARCH-XXX:** 规则描述 — 修复指引
+```
+
+常见团队定制项：
+- 技术栈选择标准（只用团队维护的语言/框架）
+- 部署拓扑限制（只用 Kubernetes、只用 serverless）
+- 数据驻留/合规要求（GDPR、数据不出境）
+- 特定反模式禁止（例如：禁止分布式事务、禁止双写）

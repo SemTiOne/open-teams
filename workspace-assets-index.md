@@ -5,9 +5,10 @@
 1. `QUICKSTART.md`
 2. `docs/README.md`
 3. `skills/README.md`
-4. `workspace-config/code-sources.yaml`
-5. `task-completion-checklist.md`
-6. `CHANGELOG.md`
+4. `docs/overall-architecture/README.md`
+5. `workspace-config/code-sources.yaml`
+6. `task-completion-checklist.md`
+7. `CHANGELOG.md`
 
 ## 初始化路径
 
@@ -90,4 +91,11 @@
 3. `docs/development-specs/workspace-versioning.md`
 4. `docs/development-specs/workspace-upgrade-model.md`
 5. `docs/development-specs/workspace-upgrade-prompts.md`
-6. `skills/_workflow/workspace-upgrade/SKILL.md`
+6. `docs/development-specs/workspace-migration-guide.md`
+7. `skills/_workflow/workspace-upgrade/SKILL.md`
+
+### 增长运营入口
+
+1. `docs/product-knowledge/README.md`
+2. `TEAM.md`
+3. `TASKS.md`

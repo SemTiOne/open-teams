@@ -938,6 +938,8 @@ def run_health_check(workspace: Path, *, force_template_mode: bool = False) -> H
 
     Args:
         workspace: Path to the workspace root.
+        force_template_mode: If True, run template repository checks regardless
+            of the adoption_mode value in workspace-version.yaml.
 
     Returns:
         A completed HealthReport with all findings.

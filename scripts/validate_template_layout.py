@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+"""Validate that the workspace template layout follows the expected structure.
+
+Checks for required directories, skill registries, and configuration files.
+Used by CI to ensure template integrity.
+
+Usage:
+    python3 scripts/validate_template_layout.py [workspace_dir]
+"""
 
 from pathlib import Path
 import sys

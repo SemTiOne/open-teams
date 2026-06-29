@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.4] — 2026-06-27
+
+### Added
+- `TEAM.md` and `TASKS.md` as team governance files (team composition, role definitions, task tracking)
+- `skills/api-design-review/checklist.md`: 6-category review checklist (design, response, security, compatibility, performance, documentation)
+- `skills/api-design-review/examples.md`: 3 real-world API review examples (clean/needs-work/rejected)
+- `skills/architecture-review/checklist.md`: 5-category review checklist (problem, solution, NFRs, integration, implementation)
+- `skills/architecture-review/examples.md`: 3 real-world architecture review examples (pass/fail/conditional)
+- `docs/development-specs/workspace-migration-guide.md`: version upgrade manual with 3-step upgrade workflow, 3 migration scenarios (PATCH/MINOR/跨版本), local customization protection matrix, rollback guide, and FAQ
+
+### Changed
+- `MEMORY.md`: restructured from single-line placeholder to guided template with 6 sections, per-section AI fill-in annotations, and boundary documentation distinguishing it from diary/docs/change-history
+- `docs/overall-architecture/README.md`: rewritten as architecture system entry with 7-layer diagram, data flow, 6 architecture principles, 5 key design decisions, and 4-phase project growth guide
+- `docs/product-knowledge/README.md`: rewritten with product positioning, 3 user personas (solo/small team/large org), 7 core scenarios mapped to Skills, 8-item competitor comparison matrix
+- `docs/projects/README.md`: upgraded from directory usage guide to full project documentation entry with workspace asset relationship diagram and maintenance triggers
+- `docs/development-specs/workspace-upgrade-model.md` §7: expanded capability list from 4 to 11 to match actual `workspace-version.yaml` entries
+- `skills/api-design-review/SKILL.md` and `rules/README.md`: expanded rules from 5 to 14 with severity levels, added report format template
+- `skills/architecture-review/SKILL.md` and `rules/README.md`: expanded rules from 4 to 10 with severity levels, added ADR template and report format
+- `skills/_templates/project/scene-template/examples.md`: fixed references from non-existent skills to real core skills (code-review, api-design-review, architecture-review)
+- `workspace-config/workspace-version.yaml`: synced version to 0.4.3 (match CHANGELOG)
+
+### Fixed
+- `docs/development-specs/README.md`: added missing link to `workspace-upgrade-prompts.md`
+- `task-plans/2026-05-26-feature-refactor-version-records.md`: fixed `<your-project>` placeholder to `open-teams`
+
 ## [v0.4.3] — 2026-06-25
 
 ### Added

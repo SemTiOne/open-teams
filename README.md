@@ -45,18 +45,6 @@
 
 ---
 
-<!-- ANIMATED DEMO PLACEHOLDER -->
-<!--
-  Suggested GIF/demo content:
-  1. Clone open-teams → 2. Run init.sh → 3. Open in Cursor → 4. AI reads AGENTS.md automatically
-  5. Show AI using code-review skill → 6. Show MEMORY.md being updated after a session
-
-  Tools to create: Screen Studio (macOS), OBS Studio (cross-platform), or VHS (terminal GIFs)
-  Dimensions: 16:9, ~60s, keep under 10MB
--->
-
----
-
 <p align="center">
   <a href="https://github.com/struggling-bird/open-teams/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/struggling-bird/open-teams"></a>
   <a href="https://github.com/struggling-bird/open-teams/actions"><img alt="CI" src="https://github.com/struggling-bird/open-teams/actions/workflows/ci.yml/badge.svg?branch=main"></a>
